@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/item_imageview"
+        android:layout_width="@dimen/card_height"
+        android:layout_height="@dimen/card_height"
+        android:layout_marginLeft="@dimen/regular_margin"
+        android:layout_marginTop="@dimen/regular_margin"
+        android:layout_marginStart="@dimen/regular_margin"
+        android:layout_weight="0"
+        />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="@dimen/regular_margin"
+        android:layout_marginRight="@dimen/regular_margin"
+        android:layout_marginTop="@dimen/regular_margin"
+        app:layout_constraintLeft_toRightOf="@+id/picture"
+        android:layout_weight="1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+        <ImageButton
+            android:id="@+id/top_button"
+
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/regular_margin"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/regular_margin"
+            />
+
+        <ImageButton
+            android:id="@+id/bottom_button"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+
+            android:layout_marginLeft="@dimen/regular_margin"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:layout_marginBottom="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/regular_margin"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/name_textview"
+            tools:text="Example Text"
+            android:textSize="32sp"
+            android:textStyle="normal"
+            android:layout_toRightOf="@+id/top_button"
+            android:layout_toEndOf="@+id/top_button"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:layout_marginLeft="@dimen/regular_margin"
+            android:layout_alignParentTop="true"
+
+            />
+
+        <TextView
+            android:id="@+id/counter_textview"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            tools:text="0"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:layout_marginBottom="@dimen/regular_margin"
+            android:layout_marginRight="@dimen/regular_margin"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/price_textview"
+            tools:text="Example Price"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/bottom_button"
+            android:layout_marginBottom="@dimen/regular_margin"
+            android:layout_marginLeft="@dimen/regular_margin"
+            android:textSize="32sp"/>
+    </RelativeLayout>
+
+</LinearLayout>
