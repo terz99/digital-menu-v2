@@ -43,4 +43,12 @@ public class Item {
     public void setmCounter(int mCounter) {
         this.mCounter = mCounter;
     }
+
+    public void increaseCounter() {
+        this.mCounter = mCounter+1;
+    }
+
+    public void decreaseCounter() {
+        this.mCounter = mCounter-1;
+    }
 }

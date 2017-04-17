@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,10 @@ import java.util.ArrayList;
 public class FoodsFragment extends Fragment {
 
 
+    private static final String TAG = FoodsFragment.class.getSimpleName();
+
+    private ArrayList<Item> cacheList = null;
+    private ArrayList<Item> words;
 
     public FoodsFragment() {
         // Required empty public constructor
@@ -37,7 +42,12 @@ public class FoodsFragment extends Fragment {
 
 
         // ArrayList of the object Word which stores the data
-        ArrayList<Item> words = addData();
+        if(cacheList != null){
+            words = cacheList;
+            cacheList = null;
+        } else {
+            words = addData();
+        }
 
         // A custom adapter (WordAdapter) which helps us arrange the items in the ListView
         final ItemAdapter adapter = new ItemAdapter(getContext(), words);
@@ -46,13 +56,19 @@ public class FoodsFragment extends Fragment {
         listView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         listView.setAdapter(adapter);
 
-        
+        Log.v(TAG, TAG + " has been created");
 
         return rootView;
     }
 
- 
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.v(TAG, TAG + " has stopped");
+        cacheList = words;
+    }
 
     /**
      * This method returns the data grabbed from the resource files
