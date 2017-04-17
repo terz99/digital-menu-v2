@@ -3,6 +3,7 @@ package com.example.terz99.digitalmenuv2;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import android.content.res.Resources;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 
@@ -52,7 +55,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
 
-        Item currItem = mList.get(position);
+        final Item currItem = mList.get(position);
+
+        final ItemViewHolder IVHolder = holder;
 
         holder.counterTextView.setText(String.valueOf(currItem.getmCounter()));
 
@@ -61,6 +66,24 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.priceTextView.setText(String.valueOf(currItem.getmPrice()));
 
         holder.itemImageView.setImageResource(currItem.getmImageId());
+
+        holder.buttonUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currItem.increaseCounter();
+                IVHolder.counterTextView.setText(String.valueOf(currItem.getmCounter()));
+            }
+        });
+
+        holder.buttonDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currItem.getmCounter() > 1){
+                    currItem.decreaseCounter();
+                    IVHolder.counterTextView.setText(String.valueOf(currItem.getmCounter()));
+                }
+            }
+        });
     }
 
     @Override
@@ -74,14 +97,23 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         TextView nameTextView;
         TextView priceTextView;
         TextView counterTextView;
+        ImageButton buttonDown;
+        ImageButton buttonUp;
 
-        public ItemViewHolder(View itemView) {
+        public ItemViewHolder(final View itemView) {
             super(itemView);
 
             itemImageView = (ImageView) itemView.findViewById(R.id.item_imageview);
             nameTextView = (TextView) itemView.findViewById(R.id.name_textview);
             priceTextView = (TextView) itemView.findViewById(R.id.price_textview);
             counterTextView = (TextView) itemView.findViewById(R.id.counter_textview);
+            buttonUp = (ImageButton) itemView.findViewById(R.id.top_button);
+            buttonDown = (ImageButton) itemView.findViewById(R.id.bottom_button);
         }
+
+
+
     }
+
+
 }
