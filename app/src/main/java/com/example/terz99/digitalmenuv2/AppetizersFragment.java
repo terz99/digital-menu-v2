@@ -3,6 +3,8 @@ package com.example.terz99.digitalmenuv2;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +35,10 @@ public class AppetizersFragment extends Fragment {
         ArrayList<Item> words = addData();
 
         // A custom adapter (WordAdapter) which helps us arrange the items in the ListView
-        final ItemAdapter adapter = new ItemAdapter(getActivity(), words);
-        ListView listView = (ListView) rootView.findViewById(R.id.listview);
+        final ItemAdapter adapter = new ItemAdapter(getContext(), words);
+        RecyclerView listView = (RecyclerView) rootView.findViewById(R.id.listview);
+        listView.setHasFixedSize(true);
+        listView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         listView.setAdapter(adapter);
 
         return rootView;
