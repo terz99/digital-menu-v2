@@ -55,24 +55,30 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    // Overriden method which inflates the options menu on the App Bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    // Overriden method which is called whenever a options menu item is clicked
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        // Get the id of the clicked item
         int clickedItemId = item.getItemId();
 
+        // Check which item was clicked and open adequate activity according to the item clicked
         switch (clickedItemId){
 
             case R.id.action_bill:
                 Toast.makeText(this, "Bill", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_my_order:
-                Toast.makeText(this, "My Order", Toast.LENGTH_SHORT).show();
+
+                Intent openMyOrderActivityIntent = new Intent(this, MyOrderActivity.class);
+                startActivity(openMyOrderActivityIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
