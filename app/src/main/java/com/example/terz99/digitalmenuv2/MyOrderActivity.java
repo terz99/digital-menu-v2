@@ -1,11 +1,13 @@
 package com.example.terz99.digitalmenuv2;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,10 +37,38 @@ public class MyOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // TODO (1) Set an alert dialog to make sure the user is ensured with his order
+                showConfirmationDialog();
 
             }
         });
+    }
+    // TODO Add comments
+    private void showConfirmationDialog() {
+
+        AlertDialog.Builder alertDialBuilder = new AlertDialog.Builder(this);
+
+        alertDialBuilder.setMessage(R.string.confirmation_dialog_msg);
+
+        alertDialBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        alertDialBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MyOrderActivity.this, R.string.order_successful, Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialBuilder.create();
+        alertDialog.show();
     }
 
     /**

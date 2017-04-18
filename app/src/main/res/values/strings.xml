@@ -9,4 +9,8 @@
     <string name="drinks">Drinks</string>
     <string name="my_order">My Order</string>
     <string name="bill">Bill</string>
+    <string name="confirmation_dialog_msg">Are you sure you want to submit your order?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="order_successful">Your order has been submitted, it will come shortly to your table</string>
 </resources>
