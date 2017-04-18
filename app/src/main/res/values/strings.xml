@@ -7,4 +7,6 @@
     <string name="appetizers">Appetizers</string>
     <string name="desserts">Desserts</string>
     <string name="drinks">Drinks</string>
+    <string name="my_order">My Order</string>
+    <string name="bill">Bill</string>
 </resources>
