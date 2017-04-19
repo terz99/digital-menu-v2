@@ -73,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
         switch (clickedItemId){
 
             case R.id.action_bill:
-                Toast.makeText(this, "Bill", Toast.LENGTH_SHORT).show();
+
+                Intent openBillActivityIntent = new Intent(this, BillActivity.class);
+                startActivity(openBillActivityIntent);
                 return true;
             case R.id.action_my_order:
 

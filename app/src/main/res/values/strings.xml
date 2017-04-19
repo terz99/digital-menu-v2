@@ -13,4 +13,6 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="order_successful">Your order has been submitted, it will come shortly to your table</string>
+    <string name="bill_request_dialog_msg">Note: After requesting a bill you will not be able to order again. Are you sure that you want to request a bill?</string>
+    <string name="bill_request_successful">Your bill has been requested. Your waiter will deliver your bill shortly.</string>
 </resources>

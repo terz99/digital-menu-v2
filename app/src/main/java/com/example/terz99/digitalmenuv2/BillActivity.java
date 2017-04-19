@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,25 +14,19 @@ import android.widget.Toast;
 
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 
-public class MyOrderActivity extends AppCompatActivity {
+public class BillActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_order);
+        setContentView(R.layout.activity_bill);
 
-        // Get link from the floating action button
-        FloatingActionButton oSubmitOrderFab =
-                (FloatingActionButton) findViewById(R.id.o_submit_order_fab);
+        FloatingActionButton requestBillFab =
+                (FloatingActionButton) findViewById(R.id.b_request_bill_fab);
 
-        // Set the floating action button to say OK instead of having a picture
-        // we call textAsBitmap() method because the setImageBitmap accepts only bitmap as a
-        // parameter and textAsBitmap returns some text in type of Bitmaps
-        oSubmitOrderFab.setImageBitmap(textAsBitmap("OK", 40, Color.WHITE));
+        requestBillFab.setImageBitmap(textAsBitmap("BILL", 40, Color.WHITE));
 
-
-        // Set on click listener to the order button
-        oSubmitOrderFab.setOnClickListener(new View.OnClickListener() {
+        requestBillFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Show an alert dialog to confirm order
@@ -52,7 +45,7 @@ public class MyOrderActivity extends AppCompatActivity {
 
         AlertDialog.Builder alertDialBuilder = new AlertDialog.Builder(this);
 
-        alertDialBuilder.setMessage(R.string.confirmation_dialog_msg);
+        alertDialBuilder.setMessage(R.string.bill_request_dialog_msg);
 
         alertDialBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             @Override
@@ -67,7 +60,7 @@ public class MyOrderActivity extends AppCompatActivity {
         alertDialBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MyOrderActivity.this, R.string.order_successful, Toast.LENGTH_LONG)
+                Toast.makeText(BillActivity.this, R.string.bill_request_successful, Toast.LENGTH_LONG)
                         .show();
                 finish();
             }
