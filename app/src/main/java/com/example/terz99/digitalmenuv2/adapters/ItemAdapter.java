@@ -1,6 +1,7 @@
 package com.example.terz99.digitalmenuv2.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,16 +89,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         TextView counterTextView;
         ImageButton buttonDown;
         ImageButton buttonUp;
+        CardView mCardView;
 
         public ItemViewHolder(final View itemView) {
             super(itemView);
 
+            mCardView = (CardView) itemView.findViewById(R.id.CV);
             itemImageView = (ImageView) itemView.findViewById(R.id.item_imageview);
             nameTextView = (TextView) itemView.findViewById(R.id.name_textview);
             priceTextView = (TextView) itemView.findViewById(R.id.price_textview);
             counterTextView = (TextView) itemView.findViewById(R.id.counter_textview);
             buttonUp = (ImageButton) itemView.findViewById(R.id.top_button);
             buttonDown = (ImageButton) itemView.findViewById(R.id.bottom_button);
+
+            mCardView.setVerticalFadingEdgeEnabled(true);
         }
 
 

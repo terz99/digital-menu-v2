@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="@dimen/card_height"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/regular_margin"
+        tools:src="@mipmap/ic_launcher"
+        />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/card_height"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/regular_margin"
+        >
+
+        <TextView
+            android:id="@+id/o_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Example Text"
+            android:textSize="32sp"
+            android:padding="@dimen/regular_margin"
+            />
+
+        <TextView
+            android:id="@+id/o_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Example Price"
+            android:textSize="32sp"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/regular_margin"
+
+            />
+
+        <TextView
+            android:id="@+id/o_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:textSize="32sp"
+            android:padding="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/regular_margin"
+            tools:text="Q"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/o_quantity"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="Quantity:"
+            android:textSize="32sp"
+            android:paddingBottom="@dimen/regular_margin"
+            android:paddingRight="@dimen/regular_margin"
+            android:paddingLeft="@dimen/regular_margin"
+            android:paddingStart="@dimen/regular_margin"
+            android:paddingEnd="@dimen/regular_margin"
+            android:layout_marginBottom="@dimen/regular_margin"
+            />
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
