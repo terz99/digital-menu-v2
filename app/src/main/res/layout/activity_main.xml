@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sliding_tabs"
+        app:tabMaxWidth="0dp"
         app:tabMode="fixed"
         app:tabGravity="fill"
         app:tabBackground="@color/colorPrimary"

@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -17,15 +16,15 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DrinksFragment extends Fragment {
+public class WineFragment extends Fragment {
 
 
-    private static final String TAG = DrinksFragment.class.getSimpleName();
+    private static final String TAG = WineFragment.class.getSimpleName();
 
     private ArrayList<Item> cacheList = null;
     private ArrayList<Item> words;
 
-    public DrinksFragment() {
+    public WineFragment() {
         // Required empty public constructor
     }
 
@@ -64,6 +63,7 @@ public class DrinksFragment extends Fragment {
         cacheList = words;
     }
 
+
     /**
      * This method returns the data grabbed from the resource files
      * @return words - an ArrayList of the object Item
@@ -71,16 +71,16 @@ public class DrinksFragment extends Fragment {
     private ArrayList<Item> addData() {
 
         ArrayList<Item> words = new ArrayList<Item>();
-        words.add(new Item("Beer", 4.45, "", R.mipmap.ic_launcher));
-        words.add(new Item("Beer", 4.45, "", R.mipmap.ic_launcher));
-        words.add(new Item("Beer", 4.45, "", R.mipmap.ic_launcher));
-        words.add(new Item("Beer", 4.45, "", R.mipmap.ic_launcher));
-        words.add(new Item("Beer", 4.45, "", R.mipmap.ic_launcher));
-        words.add(new Item("Beer", 4.45, "", R.mipmap.ic_launcher));
-        words.add(new Item("Beer", 4.45, "", R.mipmap.ic_launcher));
-        words.add(new Item("Beer", 4.45, "", R.mipmap.ic_launcher));
-        words.add(new Item("Beer", 4.45, "", R.mipmap.ic_launcher));
-        words.add(new Item("Beer", 4.45, "", R.mipmap.ic_launcher));
+        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
+        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
+        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
+        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
+        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
+        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
+        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
+        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
+        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
+        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
         return words;
     }
 

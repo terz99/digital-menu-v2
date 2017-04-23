@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -17,15 +16,15 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AppetizersFragment extends Fragment {
+public class CocktailFragment extends Fragment {
 
 
-    private static final String TAG = AppetizersFragment.class.getSimpleName();
+    private static final String TAG = CocktailFragment.class.getSimpleName();
 
     private ArrayList<Item> cacheList = null;
     private ArrayList<Item> words;
 
-    public AppetizersFragment() {
+    public CocktailFragment() {
         // Required empty public constructor
     }
 
@@ -71,16 +70,16 @@ public class AppetizersFragment extends Fragment {
     private ArrayList<Item> addData() {
 
         ArrayList<Item> words = new ArrayList<Item>();
-        words.add(new Item("Salad", 10.50, "Cucumbers, tomatoes, cheese", R.mipmap.ic_launcher));
-        words.add(new Item("Salad", 10.50, "Cucumbers, tomatoes, cheese", R.mipmap.ic_launcher));
-        words.add(new Item("Salad", 10.50, "Cucumbers, tomatoes, cheese", R.mipmap.ic_launcher));
-        words.add(new Item("Salad", 10.50, "Cucumbers, tomatoes, cheese", R.mipmap.ic_launcher));
-        words.add(new Item("Salad", 10.50, "Cucumbers, tomatoes, cheese", R.mipmap.ic_launcher));
-        words.add(new Item("Salad", 10.50, "Cucumbers, tomatoes, cheese", R.mipmap.ic_launcher));
-        words.add(new Item("Salad", 10.50, "Cucumbers, tomatoes, cheese", R.mipmap.ic_launcher));
-        words.add(new Item("Salad", 10.50, "Cucumbers, tomatoes, cheese", R.mipmap.ic_launcher));
-        words.add(new Item("Salad", 10.50, "Cucumbers, tomatoes, cheese", R.mipmap.ic_launcher));
-        words.add(new Item("Salad", 10.50, "Cucumbers, tomatoes, cheese", R.mipmap.ic_launcher));
+        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
         return words;
     }
 

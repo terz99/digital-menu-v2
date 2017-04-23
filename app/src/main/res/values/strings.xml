@@ -3,10 +3,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="foods">Foods</string>
-    <string name="appetizers">Appetizers</string>
-    <string name="desserts">Desserts</string>
-    <string name="drinks">Drinks</string>
+    <string name="pizza">Pizza</string>
+    <string name="wine">Wine</string>
+    <string name="cocktails">Cocktail</string>
     <string name="my_order">My Order</string>
     <string name="bill">Bill</string>
     <string name="confirmation_dialog_msg">Are you sure you want to submit your order?</string>

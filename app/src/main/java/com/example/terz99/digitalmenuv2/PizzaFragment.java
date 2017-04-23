@@ -1,9 +1,6 @@
 package com.example.terz99.digitalmenuv2;
 
 
-import android.content.Context;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,24 +9,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FoodsFragment extends Fragment {
+public class PizzaFragment extends Fragment {
 
 
-    private static final String TAG = FoodsFragment.class.getSimpleName();
+    private static final String TAG = PizzaFragment.class.getSimpleName();
 
     private ArrayList<Item> cacheList = null;
     private ArrayList<Item> words;
 
-    public FoodsFragment() {
+    public PizzaFragment() {
         // Required empty public constructor
     }
 

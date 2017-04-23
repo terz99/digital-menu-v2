@@ -1,16 +1,9 @@
 package com.example.terz99.digitalmenuv2;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
-import com.example.terz99.digitalmenuv2.AppetizersFragment;
-import com.example.terz99.digitalmenuv2.DessertsFragment;
-import com.example.terz99.digitalmenuv2.DrinksFragment;
-import com.example.terz99.digitalmenuv2.FoodsFragment;
-import com.example.terz99.digitalmenuv2.R;
 
 import java.util.ArrayList;
 
@@ -23,7 +16,7 @@ class CategoryAdapter extends FragmentPagerAdapter {
     // instance for the context/activity where the current action comes from
     private Context context;
     // number of fragments
-    private final int PAGE_COUNT = 4;
+    private int PAGE_COUNT;
     // titles for the slideable tabs
     private ArrayList<String> tabTitles;
 
@@ -40,6 +33,8 @@ class CategoryAdapter extends FragmentPagerAdapter {
         this.context = context;
         // Get the titles of the fragments for the slideable tab
         tabTitles = addData();
+        // Initialize the PAGE_COUNT
+        PAGE_COUNT = tabTitles.size();
     }
 
     /**
@@ -49,10 +44,9 @@ class CategoryAdapter extends FragmentPagerAdapter {
     private ArrayList<String> addData() {
 
         ArrayList<String> titles = new ArrayList<String>();
-        titles.add(context.getString(R.string.foods));
-        titles.add(context.getString(R.string.appetizers));
-        titles.add(context.getString(R.string.desserts));
-        titles.add(context.getString(R.string.drinks));
+        titles.add(context.getString(R.string.pizza));
+        titles.add(context.getString(R.string.wine));
+        titles.add(context.getString(R.string.cocktails));
         return titles;
     }
 
@@ -68,13 +62,11 @@ class CategoryAdapter extends FragmentPagerAdapter {
         switch (position){
 
             case 0:
-                return new FoodsFragment();
+                return new PizzaFragment();
             case 1:
-                return new AppetizersFragment();
-            case 2:
-                return new DessertsFragment();
+                return new WineFragment();
             default:
-                return new DrinksFragment();
+                return new CocktailFragment();
         }
     }
 
