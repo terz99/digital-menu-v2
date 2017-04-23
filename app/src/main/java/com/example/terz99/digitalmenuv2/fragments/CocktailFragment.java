@@ -1,4 +1,4 @@
-package com.example.terz99.digitalmenuv2;
+package com.example.terz99.digitalmenuv2.fragments;
 
 
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.terz99.digitalmenuv2.Item;
+import com.example.terz99.digitalmenuv2.R;
+import com.example.terz99.digitalmenuv2.adapters.ItemAdapter;
 
 import java.util.ArrayList;
 
@@ -70,16 +74,16 @@ public class CocktailFragment extends Fragment {
     private ArrayList<Item> addData() {
 
         ArrayList<Item> words = new ArrayList<Item>();
-        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex and the City", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
         return words;
     }
 

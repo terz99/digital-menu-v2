@@ -16,23 +16,14 @@
 package com.example.terz99.digitalmenuv2;
 
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.icu.util.ULocale;
 import android.os.Bundle;
-import android.support.constraint.solver.SolverVariable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.terz99.digitalmenuv2.R;
-
-import org.w3c.dom.Text;
+import com.example.terz99.digitalmenuv2.adapters.CategoryAdapter;
 
 public class MainActivity extends AppCompatActivity {
 

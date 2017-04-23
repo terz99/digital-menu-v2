@@ -1,4 +1,4 @@
-package com.example.terz99.digitalmenuv2;
+package com.example.terz99.digitalmenuv2.fragments;
 
 
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.terz99.digitalmenuv2.Item;
+import com.example.terz99.digitalmenuv2.R;
+import com.example.terz99.digitalmenuv2.adapters.ItemAdapter;
 
 import java.util.ArrayList;
 

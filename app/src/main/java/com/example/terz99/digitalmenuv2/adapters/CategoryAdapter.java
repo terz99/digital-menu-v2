@@ -1,9 +1,14 @@
-package com.example.terz99.digitalmenuv2;
+package com.example.terz99.digitalmenuv2.adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.terz99.digitalmenuv2.fragments.CocktailFragment;
+import com.example.terz99.digitalmenuv2.fragments.PizzaFragment;
+import com.example.terz99.digitalmenuv2.R;
+import com.example.terz99.digitalmenuv2.fragments.WineFragment;
 
 import java.util.ArrayList;
 
@@ -11,7 +16,7 @@ import java.util.ArrayList;
  * Created by terz99 on 3/21/17.
  */
 
-class CategoryAdapter extends FragmentPagerAdapter {
+public class CategoryAdapter extends FragmentPagerAdapter {
 
     // instance for the context/activity where the current action comes from
     private Context context;
