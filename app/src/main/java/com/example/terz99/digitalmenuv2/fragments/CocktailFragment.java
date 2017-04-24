@@ -23,6 +23,8 @@ import java.util.ArrayList;
 public class CocktailFragment extends Fragment {
 
 
+    private static final int COCKTAIL_ID = 1;
+
     private static final String TAG = CocktailFragment.class.getSimpleName();
 
     private ArrayList<Item> cacheList = null;
@@ -74,16 +76,45 @@ public class CocktailFragment extends Fragment {
     private ArrayList<Item> addData() {
 
         ArrayList<Item> words = new ArrayList<Item>();
-        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
-        words.add(new Item("Sex on the Beach", 10.50, "Vodka, rum, brandy", R.mipmap.ic_launcher));
+        words.add(new Item("Lavender White Lady", 10.60, "4cl - Appleton Estate Rum, " +
+                "Orange curacao, Lime juice, Orgeat, Grenadine, Pineapple juice", R.mipmap.ic_launcher,
+                COCKTAIL_ID));
+        words.add(new Item("Absolut Gangster", 12.60, "4 cl - Absolut Elyx, " +
+                "Lillet, " +
+                "Sugar Syrup, " +
+                "Vanilla Bitters", R.mipmap.ic_launcher, COCKTAIL_ID));
+        words.add(new Item("Lavender Spring Sour", 11.40, "4cl - Vodka, Orange Juice, Lime.", R.mipmap.ic_launcher,
+                COCKTAIL_ID));
+        words.add(new Item("Hendrick's Summer Garden", 14.60, "4cl - Vodka, rum, brandy.", R.mipmap.ic_launcher,
+                COCKTAIL_ID));
+        words.add(new Item("Mai Tai", 11.20, "4cl - Appleton 15 Year Old Rum" +
+                "Lime juice, " +
+                "Orgeat, " +
+                "Sugar syrup, " +
+                "Orange curacao, " +
+                "1 Mint leaf.", R.mipmap.ic_launcher, COCKTAIL_ID));
+        words.add(new Item("Lychee Collins", 10.50, "4cl - Beefeater Gin, " +
+                "Lychee liqueur, " +
+                "Lychee juice.", R.mipmap.ic_launcher,
+                COCKTAIL_ID));
+        words.add(new Item("Passion Rum Punch", 10.40, "4cl - Appleton Estate Rum, " +
+                "Orange curacao, " +
+                "Lime juice, " +
+                "Orgeat, " +
+                "Grenadine, " +
+                "Pineapple juice.", R.mipmap.ic_launcher,
+                COCKTAIL_ID));
+        words.add(new Item("El Hefe", 12.70, "4cl - Plantation Guatemala & Belize Rum" +
+                "Lillet, " +
+                "Maraschino Syrup, " +
+                "Dry Curacao.", R.mipmap.ic_launcher, COCKTAIL_ID));
+        words.add(new Item("Wild Berry Spritzer", 10.00, "Vodka, rum, brandy", R.mipmap.ic_launcher,
+                COCKTAIL_ID));
+        words.add(new Item("Hunter's Grog", 12.90, "Grapefruit Juice, " +
+                "Lemon Juice, " +
+                "Bitter Orange Marmalade, " +
+                "Ginger Beer.", R.mipmap.ic_launcher,
+                COCKTAIL_ID));
         return words;
     }
 

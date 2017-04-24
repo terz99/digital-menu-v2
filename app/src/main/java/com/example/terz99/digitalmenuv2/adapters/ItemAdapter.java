@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.terz99.digitalmenuv2.Item;
 import com.example.terz99.digitalmenuv2.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -53,7 +54,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         holder.nameTextView.setText(currItem.getmName());
 
-        holder.priceTextView.setText(String.valueOf(currItem.getmPrice()));
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        holder.priceTextView.setText(String.valueOf(decimalFormat.format(currItem.getmPrice())) + "$");
 
         holder.itemImageView.setImageResource(currItem.getmImageId());
 
