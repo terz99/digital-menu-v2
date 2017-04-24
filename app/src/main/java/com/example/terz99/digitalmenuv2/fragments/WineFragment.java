@@ -75,16 +75,16 @@ public class WineFragment extends Fragment {
     private ArrayList<Item> addData() {
 
         ArrayList<Item> words = new ArrayList<Item>();
-        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
-        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
-        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
-        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
-        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
-        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
-        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
-        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
-        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
-        words.add(new Item("Merlot", 8.45, "750ml", R.mipmap.ic_launcher));
+        words.add(new Item("Reisling", 33.75, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
+        words.add(new Item("Ge", 32.30, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
+        words.add(new Item("Chardonnay", 31.90, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
+        words.add(new Item("Sauvigon Blanc", 24.50, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
+        words.add(new Item("Syrah", 22.60, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
+        words.add(new Item("Merlot", 23.60, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
+        words.add(new Item("Cabernet Saubignon", 25.20, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
+        words.add(new Item("Pinot Noir", 31.90, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
+
+
         return words;
     }
 

@@ -75,16 +75,16 @@ public class PizzaFragment extends Fragment {
     private ArrayList<Item> addData() {
 
         ArrayList<Item> words = new ArrayList<Item>();
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher));
+        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,0));
+        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
+        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
+        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
+        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
+        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
+        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
+        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
+        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
+        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
         return words;
     }
 }

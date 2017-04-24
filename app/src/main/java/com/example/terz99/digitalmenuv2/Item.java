@@ -11,13 +11,15 @@ public class Item {
     private String mDescription;
     private int mImageId;
     private int mCounter;
+    private int mCategoryId;
 
-    public Item(String mName, double mPrice, String mDescription, int mImageId) {
+    public Item(String mName, double mPrice, String mDescription, int mImageId, int mCategoryId) {
         this.mName = mName;
         this.mPrice = mPrice;
         this.mDescription = mDescription;
         this.mImageId = mImageId;
         mCounter = 1;
+        this.mCategoryId = mCategoryId;
     }
 
     public String getmName() {
@@ -38,6 +40,10 @@ public class Item {
 
     public int getmCounter() {
         return mCounter;
+    }
+
+    public int getmCategoryId() {
+        return mCategoryId;
     }
 
     public void setmCounter(int mCounter) {
