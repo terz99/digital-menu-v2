@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.terz99.digitalmenuv2.Item;
@@ -59,6 +60,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         holder.itemImageView.setImageResource(currItem.getmImageId());
 
+        holder.mCardView.setVerticalFadingEdgeEnabled(true);
+
         holder.buttonUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,14 +100,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             super(itemView);
 
             mCardView = (CardView) itemView.findViewById(R.id.CV);
-            itemImageView = (ImageView) itemView.findViewById(R.id.item_imageview);
+            itemImageView = (ImageView) itemView.findViewById(R.id.picture);
             nameTextView = (TextView) itemView.findViewById(R.id.name_textview);
             priceTextView = (TextView) itemView.findViewById(R.id.price_textview);
             counterTextView = (TextView) itemView.findViewById(R.id.counter_textview);
             buttonUp = (ImageButton) itemView.findViewById(R.id.top_button);
             buttonDown = (ImageButton) itemView.findViewById(R.id.bottom_button);
 
-            mCardView.setVerticalFadingEdgeEnabled(true);
         }
 
 

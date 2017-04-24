@@ -77,12 +77,12 @@ public class CocktailFragment extends Fragment {
 
         ArrayList<Item> words = new ArrayList<Item>();
         words.add(new Item("Lavender White Lady", 10.60, "4cl - Appleton Estate Rum, " +
-                "Orange curacao, Lime juice, Orgeat, Grenadine, Pineapple juice", R.mipmap.ic_launcher,
+                "Orange curacao, Lime juice, Orgeat, Grenadine, Pineapple juice", R.drawable.absolut_gangster,
                 COCKTAIL_ID));
         words.add(new Item("Absolut Gangster", 12.60, "4 cl - Absolut Elyx, " +
                 "Lillet, " +
                 "Sugar Syrup, " +
-                "Vanilla Bitters", R.mipmap.ic_launcher, COCKTAIL_ID));
+                "Vanilla Bitters", R.drawable.el_jefe, COCKTAIL_ID));
         words.add(new Item("Lavender Spring Sour", 11.40, "4cl - Vodka, Orange Juice, Lime.", R.mipmap.ic_launcher,
                 COCKTAIL_ID));
         words.add(new Item("Hendrick's Summer Garden", 14.60, "4cl - Vodka, rum, brandy.", R.mipmap.ic_launcher,
@@ -92,28 +92,28 @@ public class CocktailFragment extends Fragment {
                 "Orgeat, " +
                 "Sugar syrup, " +
                 "Orange curacao, " +
-                "1 Mint leaf.", R.mipmap.ic_launcher, COCKTAIL_ID));
+                "1 Mint leaf.", R.drawable.henrick_summer_gardem, COCKTAIL_ID));
         words.add(new Item("Lychee Collins", 10.50, "4cl - Beefeater Gin, " +
                 "Lychee liqueur, " +
-                "Lychee juice.", R.mipmap.ic_launcher,
+                "Lychee juice.", R.drawable.hunter_grog,
                 COCKTAIL_ID));
         words.add(new Item("Passion Rum Punch", 10.40, "4cl - Appleton Estate Rum, " +
                 "Orange curacao, " +
                 "Lime juice, " +
                 "Orgeat, " +
                 "Grenadine, " +
-                "Pineapple juice.", R.mipmap.ic_launcher,
+                "Pineapple juice.", R.drawable.lavender_white_lady,
                 COCKTAIL_ID));
         words.add(new Item("El Hefe", 12.70, "4cl - Plantation Guatemala & Belize Rum" +
                 "Lillet, " +
                 "Maraschino Syrup, " +
-                "Dry Curacao.", R.mipmap.ic_launcher, COCKTAIL_ID));
+                "Dry Curacao.", R.drawable.wild_berry_spritzer, COCKTAIL_ID));
         words.add(new Item("Wild Berry Spritzer", 10.00, "Vodka, rum, brandy", R.mipmap.ic_launcher,
                 COCKTAIL_ID));
         words.add(new Item("Hunter's Grog", 12.90, "Grapefruit Juice, " +
                 "Lemon Juice, " +
                 "Bitter Orange Marmalade, " +
-                "Ginger Beer.", R.mipmap.ic_launcher,
+                "Ginger Beer.", R.drawable.mai_tai,
                 COCKTAIL_ID));
         return words;
     }

@@ -9,5 +9,6 @@
 
     <!-- Unselected text color for the tab layout -->
     <color name="unselected_text_color">#A8A19E</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>
