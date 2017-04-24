@@ -16,7 +16,7 @@ public class OrderDbHelper extends SQLiteOpenHelper{
     // The name of the order database
     private static final String DATABASE_NAME = "order.db";
     // The database version
-    private static int DATABASE_VERSION = 0;
+    private static int DATABASE_VERSION = 1;
 
     /**
      * Public constructor used to get a link from the database helper

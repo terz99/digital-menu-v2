@@ -15,7 +15,15 @@ import static com.example.terz99.digitalmenuv2.data.MenuContract.*;
 public class MenuDbHelper extends SQLiteOpenHelper{
 
     // The current version of the database
-    private static int DATABASE_VERSION = 0;
+    private static final int DATABASE_VERSION = 1;
+
+    /**
+     * @return the database version
+     */
+    public static int getDatabaseVersion() {
+        return DATABASE_VERSION;
+    }
+
     // The name of the database
     private static final String DATABASE_NAME = "menu.db";
 
