@@ -3,37 +3,42 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:color="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/CV"
         style="@style/MyCardViewStyle">
-
         <LinearLayout
             android:layout_width="match_parent"
+            android:id="@+id/LL"
             android:layout_height="@dimen/card_height"
             android:orientation="horizontal">
 
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height">
 
                 <ImageView
-                    android:layout_width="@dimen/card_width"
-                    android:layout_height="@dimen/card_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:adjustViewBounds="true"
                     android:id="@+id/picture"
-                    tools:background="@drawable/absolut_gangster"
+
                     >
                 </ImageView>
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/gradien_height"
                     android:id="@+id/name_textview"
                     tools:text="Name"
-                    android:textSize="32sp"
+                    android:textSize="@dimen/text_size"
                     android:textColor="@color/white"
-
-                    android:layout_margin="16dp"/>
+                    android:background="@drawable/scrim"
+                    />
             </RelativeLayout>
 
 
@@ -41,6 +46,7 @@
 
             <RelativeLayout
                 android:layout_width="0dp"
+
                 android:layout_height="@dimen/card_height"
                 app:layout_constraintLeft_toRightOf="@+id/picture"
                 android:layout_weight="1"
@@ -73,7 +79,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="32sp"
+                        android:textSize="@dimen/text_size"
                         tools:text="0" />
 
                     <ImageButton
@@ -97,7 +103,7 @@
                     android:layout_alignParentTop="true"
                     android:id="@+id/add_button"
                     android:text="ADD"
-                    android:textSize="32sp"
+                    android:textSize="@dimen/text_size"
                     android:gravity="center"
                     android:background="@android:color/transparent"
                     />
@@ -125,7 +131,7 @@
                     android:layout_marginBottom="@dimen/regular_margin"
                     android:layout_marginLeft="@dimen/regular_margin"
                     android:layout_marginRight="@dimen/regular_margin"
-                    android:textSize="32sp"/>
+                    android:textSize="@dimen/text_size"/>
 
 
 

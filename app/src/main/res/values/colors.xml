@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="Tabs_color">#FF9100</color>
     <!-- Selected text and indicator color for the tab layout -->
     <color name="selected_text_color">#FFFFFF</color>
 

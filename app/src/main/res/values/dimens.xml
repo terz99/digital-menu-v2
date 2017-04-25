@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="card_height">300dp</dimen>
-    <dimen name="card_width">400dp</dimen>
+    <dimen name="card_height">250dp</dimen>
+    <dimen name="card_width">375dp</dimen>
     <dimen name="button_dimens">96dp</dimen>
+    <dimen name="gradien_height">83.3dp</dimen>
     <dimen name="regular_margin">32dp</dimen>
+    <dimen name="text_size">20sp</dimen>
 </resources>
