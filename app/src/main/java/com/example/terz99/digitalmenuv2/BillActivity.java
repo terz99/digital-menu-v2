@@ -29,6 +29,8 @@ import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 
 public class BillActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<OrderItem>>{
 
+    public static final int BILL_ID = 1321;
+
     // Loader id for the bill database
     private static final int BILL_LOADER_ID = 32131;
 
@@ -91,8 +93,20 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
         alertDialBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(BillActivity.this, R.string.bill_request_successful, Toast.LENGTH_LONG)
-                        .show();
+
+                if(mData == null || mData.size() == 0){
+                    Toast.makeText(BillActivity.this, R.string.bill_request_failed, Toast.LENGTH_SHORT).show();
+                } else {
+
+                    getContentResolver().delete(BillContract.BillEntry.CONTENT_URI, null, null);
+                    mData = null;
+                    mAdapter.notifyDataSetChanged();
+
+                    Toast.makeText(BillActivity.this, R.string.bill_request_successful, Toast.LENGTH_LONG)
+                            .show();
+                }
+
+
                 finish();
             }
         });
@@ -149,7 +163,7 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
 
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new OrderAdapter(this, mData);
+        mAdapter = new OrderAdapter(this, mData, BILL_ID);
 
         mRecyclerView.setAdapter(mAdapter);
     }

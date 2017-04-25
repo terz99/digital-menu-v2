@@ -12,10 +12,13 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.terz99.digitalmenuv2.BillActivity;
 import com.example.terz99.digitalmenuv2.Item;
 import com.example.terz99.digitalmenuv2.OrderItem;
 import com.example.terz99.digitalmenuv2.R;
@@ -36,9 +39,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
 
     private boolean timesclicked = false;
 
-    public OrderAdapter(Context context, ArrayList<OrderItem> data){
+    private int mIdentifier;
+
+    public OrderAdapter(Context context, ArrayList<OrderItem> data, int identifier){
         mContext = context;
         mData = data;
+        mIdentifier = identifier;
     }
 
     @Override
@@ -57,9 +63,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
     }
 
     @Override
-    public void onBindViewHolder(final OrderItemViewHolder holder, int position) {
+    public void onBindViewHolder(final OrderItemViewHolder holder, final int position) {
 
-        OrderItem currOrderItem = mData.get(position);
+        final OrderItem currOrderItem = mData.get(position);
         final OrderAdapter.OrderItemViewHolder OVHolder = holder;
 
         holder.imageView.setImageResource(currOrderItem.getmImageId());
@@ -100,6 +106,26 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
 
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
         holder.priceTextView.setText(String.valueOf(decimalFormat.format(fullPrice)) + "$");
+
+        if(mIdentifier == BillActivity.BILL_ID){
+            holder.clearButton.setVisibility(View.INVISIBLE);
+        } else {
+
+            holder.clearButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String selection = OrderContract.OrderEntry.COLUMN_NAME + "=?";
+                    String[] selectionArgs = {
+                            currOrderItem.getmName()
+                    };
+                    mContext.getContentResolver().delete(OrderContract.OrderEntry.CONTENT_URI, selection, selectionArgs);
+                    mData.remove(position);
+                    Toast.makeText(mContext, R.string.deletion_successful, Toast.LENGTH_SHORT).show();
+                    notifyDataSetChanged();
+                }
+            });
+        }
     }
 
     @Override
@@ -115,6 +141,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
         TextView priceTextView;
         CardView mCardView;
         LinearLayout mLinearLayout;
+        ImageButton clearButton;
 
         public OrderItemViewHolder(View itemView) {
             super(itemView);
@@ -125,7 +152,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
             imageView = (ImageView) itemView.findViewById(R.id.o_image);
             mCardView = (CardView) itemView.findViewById(R.id.o_CV);
             mLinearLayout = (LinearLayout) itemView.findViewById(R.id.o_LL);
-
+            clearButton = (ImageButton) itemView.findViewById(R.id.clear_button);
 
             mCardView.setMaxCardElevation(getPixelsFromDPs(10));
             mCardView.setPreventCornerOverlap(false);

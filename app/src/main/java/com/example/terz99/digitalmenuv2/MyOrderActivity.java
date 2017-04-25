@@ -33,6 +33,8 @@ import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 
 public class MyOrderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<OrderItem>>{
 
+    public static final int ORDER_ID = 1241;
+
     private static final String TAG = MyOrderActivity.class.getSimpleName();
 
     private static final int ORDER_LOADER_ID = 10;
@@ -161,6 +163,7 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
                     // Delete all sources of data from the MyOrderActivity since the order has been submitted already
                     mData = null;
                     getContentResolver().delete(OrderContract.OrderEntry.CONTENT_URI, null, null);
+                    mAdapter.notifyDataSetChanged();
 
                     // Toast a message to the user that the order has been submitted successfully
                     Toast.makeText(MyOrderActivity.this, R.string.order_successful, Toast.LENGTH_SHORT).show();
@@ -205,7 +208,7 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
 
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new OrderAdapter(this, mData);
+        mAdapter = new OrderAdapter(this, mData, ORDER_ID);
 
         mRecyclerView.setAdapter(mAdapter);
     }
