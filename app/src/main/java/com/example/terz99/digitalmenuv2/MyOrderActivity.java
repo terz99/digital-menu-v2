@@ -119,6 +119,7 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
                         contentValues.put(BillContract.BillEntry.COLUMN_NAME, currItem.getmName());
                         contentValues.put(BillContract.BillEntry.COLUMN_PHOTO_ID, currItem.getmImageId());
                         contentValues.put(BillContract.BillEntry.COLUMN_PRICE, String.valueOf(currItem.getmPrice()));
+                        contentValues.put(BillContract.BillEntry.COLUMN_DESCRIPTION, "");
 
                         /**
                          * Write projection, selection and selectionArgs
@@ -257,7 +258,7 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
 
             ArrayList<OrderItem> data = new ArrayList<OrderItem>();
 
-            while (cursor.moveToNext()){
+            while (cursor != null && cursor.moveToNext()){
 
                 String name = cursor.getString(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_NAME));
                 int imageId = cursor.getInt(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_PHOTO_ID));
@@ -265,6 +266,10 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
                 int quantity = cursor.getInt(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_QUANTITY));
 
                 data.add(new OrderItem(name, price, quantity, imageId));
+            }
+
+            if (cursor != null) {
+                cursor.close();
             }
 
             return data;
