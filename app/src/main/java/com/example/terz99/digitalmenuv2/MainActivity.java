@@ -74,6 +74,18 @@ public class MainActivity extends AppCompatActivity{
             addData();
         }
 
+        try {
+            if(PizzaFragment.mData == null || PizzaFragment.mData.getCount() == 0)
+                getSupportLoaderManager().initLoader(PIZZA_LOADER_ID, null, fetchLoaderCallbacks);
+            if(WineFragment.mData == null || WineFragment.mData.getCount() == 0)
+                getSupportLoaderManager().initLoader(WINE_LOADER_ID, null, fetchLoaderCallbacks);
+            if(CocktailFragment.mData == null || CocktailFragment.mData.getCount() == 0)
+                getSupportLoaderManager().initLoader(COCKTAIL_LOADER_ID, null, fetchLoaderCallbacks);
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // get the viewpager
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         // declare a new adapter for the viewpager
@@ -84,10 +96,6 @@ public class MainActivity extends AppCompatActivity{
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         // set tabLayout in sync with the viewpager
         tabLayout.setupWithViewPager(viewPager);
-
-        getSupportLoaderManager().initLoader(PIZZA_LOADER_ID, null, fetchLoaderCallbacks);
-        getSupportLoaderManager().initLoader(WINE_LOADER_ID, null, fetchLoaderCallbacks);
-        getSupportLoaderManager().initLoader(COCKTAIL_LOADER_ID, null, fetchLoaderCallbacks);
     }
 
     /**
@@ -97,6 +105,18 @@ public class MainActivity extends AppCompatActivity{
     private void addData() {
 
         mItems = new ArrayList<Item>();
+
+        // Adding pizzas
+        mItems.add(new Item("Pizza Amerikano", 19.20, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
+        mItems.add(new Item("Pizza Amerikano", 17.00, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
+        mItems.add(new Item("Pizza Amerikano", 18.90, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
+        mItems.add(new Item("Pizza Amerikano", 19.00, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
+        mItems.add(new Item("Pizza Amerikano", 16.00, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
+        mItems.add(new Item("Pizza Amerikano", 16.70, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
+        mItems.add(new Item("Pizza Amerikano", 18.80, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
+        mItems.add(new Item("Pizza Amerikano", 16.40, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
+        mItems.add(new Item("Pizza Amerikano", 17.80, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
+        mItems.add(new Item("Pizza Amerikano", 19.30, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
 
         // Adding cocktails
         mItems.add(new Item("Lavender White Lady", 10.60, "4cl - Appleton Estate Rum, " +
@@ -142,18 +162,6 @@ public class MainActivity extends AppCompatActivity{
                 "Bitter Orange Marmalade, " +
                 "Ginger Beer.", R.drawable.hunter_grog,
                 COCKTAIL_ID));
-
-        // Adding pizzas
-        mItems.add(new Item("Pizza Amerikano", 19.20, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 17.00, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 18.90, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 19.00, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 16.00, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 16.70, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 18.80, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 16.40, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 17.80, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 19.30, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
 
         // Adding wines
         mItems.add(new Item("Reisling", 33.75, "750ml", R.drawable.pizza_amerikano, WINE_ID));

@@ -82,7 +82,7 @@ public class WineFragment extends Fragment {
 
         ArrayList<Item> words = new ArrayList<Item>();
 
-        if(mData != null){
+        if(mData != null && mData.getCount() > 0){
 
             mData.moveToFirst();
 
