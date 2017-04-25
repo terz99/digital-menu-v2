@@ -14,14 +14,74 @@
         android:id="@+id/o_listview" />
 
     <android.support.design.widget.FloatingActionButton
-
+        android:elevation="8dp"
         android:layout_width="wrap_content"
+        android:layout_margin="@dimen/regular_margin"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:id="@+id/o_submit_order_fab"
+        android:layout_above="@+id/bottom_layout_myorder"
         app:backgroundTint="@android:color/holo_green_dark"
         app:fabSize="auto"/>
+
+    <LinearLayout
+        android:id="@+id/bottom_layout_myorder"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/shadow"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/Tabs_color">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Total Prize: "
+                android:textSize="@dimen/text_size"
+                android:layout_margin="@dimen/regular_margin"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/regular_margin"
+                android:layout_marginStart="@dimen/regular_margin"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/total_prize_order"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size"
+                android:layout_marginLeft="@dimen/regular_margin"
+                android:layout_marginTop="@dimen/regular_margin"
+                android:layout_marginBottom="@dimen/regular_margin"
+                android:layout_marginStart="@dimen/regular_margin"
+                android:textColor="@android:color/white"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="@dimen/regular_margin"
+                android:layout_marginTop="@dimen/regular_margin"
+                android:textSize="@dimen/text_size"
+                android:text="$"
+                />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>
