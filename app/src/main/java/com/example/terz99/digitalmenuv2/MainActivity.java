@@ -34,6 +34,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.terz99.digitalmenuv2.adapters.CategoryAdapter;
 import com.example.terz99.digitalmenuv2.data.MenuContract;
@@ -50,16 +51,15 @@ import static com.example.terz99.digitalmenuv2.fragments.WineFragment.*;
 
 public class MainActivity extends AppCompatActivity{
 
-    // ID for the wine loader
-    public static final int WINE_LOADER_ID = 2;
-    // ID for the cocktail loader
-    public static final int COCKTAIL_LOADER_ID = 3;
-    // ID for the pizza loader
-    public static final int PIZZA_LOADER_ID = 1;
+    // ID for query loader
+    private static final int FETCH_DATA_LOADER_ID = 5;
     // ID for the insert loader
     private static final int MENU_LOADER_ID = 0;
     // Helper ArrayList<Item> to store data for a short amount of time
     private ArrayList<Item> mItems;
+    public static ArrayList<Item> mPizzaData;
+    public static ArrayList<Item> mWineData;
+    public static ArrayList<Item> mCocktailData;
 
     // Log tag
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -72,30 +72,12 @@ public class MainActivity extends AppCompatActivity{
 
         if(checkDataBaseVersion()){
             addData();
+        } else {
+            if(mPizzaData == null || mPizzaData.size() == 0 || mWineData == null || mWineData.size() == 0 || mCocktailData == null || mCocktailData.size() == 0)
+                getSupportLoaderManager().initLoader(FETCH_DATA_LOADER_ID, null, fetchLoaderCallbacks);
+            else
+                setupContent();
         }
-
-        try {
-            if(PizzaFragment.mData == null || PizzaFragment.mData.getCount() == 0)
-                getSupportLoaderManager().initLoader(PIZZA_LOADER_ID, null, fetchLoaderCallbacks);
-            if(WineFragment.mData == null || WineFragment.mData.getCount() == 0)
-                getSupportLoaderManager().initLoader(WINE_LOADER_ID, null, fetchLoaderCallbacks);
-            if(CocktailFragment.mData == null || CocktailFragment.mData.getCount() == 0)
-                getSupportLoaderManager().initLoader(COCKTAIL_LOADER_ID, null, fetchLoaderCallbacks);
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // get the viewpager
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        // declare a new adapter for the viewpager
-        CategoryAdapter pagerAdapter = new CategoryAdapter(getSupportFragmentManager(), this);
-        // set the adapter to the viewpager
-        viewPager.setAdapter(pagerAdapter);
-        // get the tabLayout resource
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        // set tabLayout in sync with the viewpager
-        tabLayout.setupWithViewPager(viewPager);
     }
 
     /**
@@ -246,73 +228,23 @@ public class MainActivity extends AppCompatActivity{
         @Override
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-
-            Log.e(TAG, "" + id);
-
-            String[] projection;
-            String[] selectionArgs;
-            String selection;
-
             switch (id){
 
-                case MainActivity.PIZZA_LOADER_ID:
+                case FETCH_DATA_LOADER_ID:
 
-                    projection = new String[]{
+                    String[] projection = {
                             MenuContract.MenuEntry.COLUMN_NAME,
                             MenuContract.MenuEntry.COLUMN_DESCRIPTION,
                             MenuContract.MenuEntry.COLUMN_PRICE,
-                            MenuContract.MenuEntry.COLUMN_PHOTO_ID
+                            MenuContract.MenuEntry.COLUMN_PHOTO_ID,
+                            MenuContract.MenuEntry.COLUMN_CATEGORY_ID
                     };
-
-                    selection = MenuContract.MenuEntry.COLUMN_CATEGORY_ID + "=?";
-
-                    selectionArgs = new String[]{String.valueOf(PizzaFragment.PIZZA_ID)};
 
                     return new CursorLoader(MainActivity.this,
                             MenuContract.MenuEntry.CONTENT_URI,
                             projection,
-                            selection,
-                            selectionArgs,
-                            null);
-
-                case MainActivity.WINE_LOADER_ID:
-
-                    projection = new String[]{
-                            MenuContract.MenuEntry.COLUMN_NAME,
-                            MenuContract.MenuEntry.COLUMN_DESCRIPTION,
-                            MenuContract.MenuEntry.COLUMN_PRICE,
-                            MenuContract.MenuEntry.COLUMN_PHOTO_ID
-                    };
-
-                    selection = MenuContract.MenuEntry.COLUMN_CATEGORY_ID + "=?";
-
-                    selectionArgs = new String[]{String.valueOf(WineFragment.WINE_ID)};
-
-                    return new CursorLoader(MainActivity.this,
-                            MenuContract.MenuEntry.CONTENT_URI,
-                            projection,
-                            selection,
-                            selectionArgs,
-                            null);
-
-                case MainActivity.COCKTAIL_LOADER_ID:
-
-                    projection = new String[]{
-                            MenuContract.MenuEntry.COLUMN_NAME,
-                            MenuContract.MenuEntry.COLUMN_DESCRIPTION,
-                            MenuContract.MenuEntry.COLUMN_PRICE,
-                            MenuContract.MenuEntry.COLUMN_PHOTO_ID
-                    };
-
-                    selection = MenuContract.MenuEntry.COLUMN_CATEGORY_ID + "=?";
-
-                    selectionArgs = new String[]{String.valueOf(CocktailFragment.COCKTAIL_ID)};
-
-                    return new CursorLoader(MainActivity.this,
-                            MenuContract.MenuEntry.CONTENT_URI,
-                            projection,
-                            selection,
-                            selectionArgs,
+                            null,
+                            null,
                             null);
 
                 default:
@@ -323,23 +255,34 @@ public class MainActivity extends AppCompatActivity{
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 
-            switch (loader.getId()){
+            mCocktailData = new ArrayList<Item>();
+            mWineData = new ArrayList<Item>();
+            mPizzaData = new ArrayList<Item>();
 
-                case PIZZA_LOADER_ID:
-                    Log.e(TAG, "Added pizza data");
-                    PizzaFragment.mData = data;
-                    break;
-                case WINE_LOADER_ID:
-                    Log.e(TAG, "Added wine data");
-                    WineFragment.mData = data;
-                    break;
-                case COCKTAIL_LOADER_ID:
-                    Log.e(TAG, "Added cocktail data");
-                    CocktailFragment.mData = data;
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown loader id " + loader.getId());
+            while(data.moveToNext()){
+
+                String name = data.getString(data.getColumnIndex(MenuContract.MenuEntry.COLUMN_NAME));
+                String description = data.getString(data.getColumnIndex(MenuContract.MenuEntry.COLUMN_DESCRIPTION));
+                double price = Double.parseDouble(data.getString(data.getColumnIndex(MenuContract.MenuEntry.COLUMN_PRICE)));
+                int imageId = data.getInt(data.getColumnIndex(MenuContract.MenuEntry.COLUMN_PHOTO_ID));
+
+                int categoryId = data.getInt(data.getColumnIndex(MenuContract.MenuEntry.COLUMN_CATEGORY_ID));
+
+                switch (categoryId){
+
+                    case PIZZA_ID:
+                        mPizzaData.add(new Item(name, price, description, imageId, categoryId));
+                        break;
+                    case WINE_ID:
+                        mWineData.add(new Item(name, price, description, imageId, categoryId));
+                        break;
+                    case COCKTAIL_ID:
+                        mCocktailData.add(new Item(name, price, description, imageId, categoryId));
+                        break;
+                }
             }
+
+            setupContent();
         }
 
         @Override
@@ -347,6 +290,20 @@ public class MainActivity extends AppCompatActivity{
             // Do nothing
         }
     };
+
+    private void setupContent() {
+
+        // get the viewpager
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        // declare a new adapter for the viewpager
+        CategoryAdapter pagerAdapter = new CategoryAdapter(getSupportFragmentManager(), this);
+        // set the adapter to the viewpager
+        viewPager.setAdapter(pagerAdapter);
+        // get the tabLayout resource
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        // set tabLayout in sync with the viewpager
+        tabLayout.setupWithViewPager(viewPager);
+    }
 
     private LoaderManager.LoaderCallbacks<Integer> uploadLoaderCallbacks = new LoaderManager.LoaderCallbacks<Integer>() {
         @Override
@@ -356,7 +313,7 @@ public class MainActivity extends AppCompatActivity{
 
         @Override
         public void onLoadFinished(Loader<Integer> loader, Integer data) {
-            // Do nothing
+            getSupportLoaderManager().initLoader(FETCH_DATA_LOADER_ID, null, fetchLoaderCallbacks);
         }
 
         @Override
