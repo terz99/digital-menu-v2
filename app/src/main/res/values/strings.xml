@@ -21,4 +21,6 @@
     <string name="deletion_successful">has been deleted from the order list.</string>
     <string name="bill_request_failed">You have to order something first.</string>
     <string name="add_button_clicked">has been added to MyOrder</string>
+    <string name="refresh">Refresh</string>
+    <string name="password_prompt">Type in the password:</string>
 </resources>

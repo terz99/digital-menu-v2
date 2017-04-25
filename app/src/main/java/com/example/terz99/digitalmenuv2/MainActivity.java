@@ -18,6 +18,7 @@ package com.example.terz99.digitalmenuv2;
 import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -27,12 +28,15 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -222,68 +226,76 @@ public class MainActivity extends AppCompatActivity{
                 Intent openMyOrderActivityIntent = new Intent(this, MyOrderActivity.class);
                 startActivity(openMyOrderActivityIntent);
                 return true;
+
+            case R.id.action_refresh:
+                showPasswordDialog();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private LoaderManager.LoaderCallbacks<Cursor> fetchLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
+    private void showPasswordDialog() {
 
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        alertDialogBuilder.setCancelable(false);
+
+        alertDialogBuilder.setView(LayoutInflater.from(this).inflate(R.layout.password_prompt, null));
+
+        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private LoaderManager.LoaderCallbacks<ArrayList<Item>> fetchLoaderCallbacks = new LoaderManager.LoaderCallbacks<ArrayList<Item>>() {
 
         @Override
-        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        public Loader<ArrayList<Item>> onCreateLoader(int id, Bundle args) {
 
             switch (id){
 
                 case FETCH_DATA_LOADER_ID:
-
-                    String[] projection = {
-                            MenuContract.MenuEntry.COLUMN_NAME,
-                            MenuContract.MenuEntry.COLUMN_DESCRIPTION,
-                            MenuContract.MenuEntry.COLUMN_PRICE,
-                            MenuContract.MenuEntry.COLUMN_PHOTO_ID,
-                            MenuContract.MenuEntry.COLUMN_CATEGORY_ID
-                    };
-
-                    return new CursorLoader(MainActivity.this,
-                            MenuContract.MenuEntry.CONTENT_URI,
-                            projection,
-                            null,
-                            null,
-                            null);
-
+                    return new FetchMenuDataTask(MainActivity.this);
                 default:
                     throw new IllegalArgumentException("Unknown loader id " + id);
             }
         }
 
         @Override
-        public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        public void onLoadFinished(Loader<ArrayList<Item>> loader, ArrayList<Item> data) {
 
             mCocktailData = new ArrayList<Item>();
             mWineData = new ArrayList<Item>();
             mPizzaData = new ArrayList<Item>();
 
-            while(data.moveToNext()){
+            for(int i = 0; i < data.size(); i++){
 
-                String name = data.getString(data.getColumnIndex(MenuContract.MenuEntry.COLUMN_NAME));
-                String description = data.getString(data.getColumnIndex(MenuContract.MenuEntry.COLUMN_DESCRIPTION));
-                double price = Double.parseDouble(data.getString(data.getColumnIndex(MenuContract.MenuEntry.COLUMN_PRICE)));
-                int imageId = data.getInt(data.getColumnIndex(MenuContract.MenuEntry.COLUMN_PHOTO_ID));
+                Item currItem = data.get(i);
 
-                int categoryId = data.getInt(data.getColumnIndex(MenuContract.MenuEntry.COLUMN_CATEGORY_ID));
-
-                switch (categoryId){
-
-                    case PIZZA_ID:
-                        mPizzaData.add(new Item(name, price, description, imageId, categoryId));
-                        break;
-                    case WINE_ID:
-                        mWineData.add(new Item(name, price, description, imageId, categoryId));
-                        break;
-                    case COCKTAIL_ID:
-                        mCocktailData.add(new Item(name, price, description, imageId, categoryId));
-                        break;
+                if(currItem.getmCategoryId() == PIZZA_ID){
+                    mPizzaData.add(currItem);
+                } else if(currItem.getmCategoryId() == WINE_ID){
+                    mWineData.add(currItem);
+                } else {
+                    mCocktailData.add(currItem);
                 }
             }
 
@@ -291,8 +303,10 @@ public class MainActivity extends AppCompatActivity{
         }
 
         @Override
-        public void onLoaderReset(Loader<Cursor> loader) {
-            // Do nothing
+        public void onLoaderReset(Loader<ArrayList<Item>> loader) {
+            mPizzaData = null;
+            mCocktailData = null;
+            mWineData = null;
         }
     };
 

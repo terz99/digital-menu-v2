@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:title="@string/refresh"
+        android:id="@+id/action_refresh"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:title="@string/bill"
         android:id="@+id/action_bill"
         app:showAsAction="ifRoom"/>
