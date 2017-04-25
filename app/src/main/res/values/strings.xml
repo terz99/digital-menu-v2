@@ -17,4 +17,5 @@
     <string name="database_version_label">Database version</string>
     <string name="database_version_key">database version</string>
     <string name="database_version_default_value">0</string>
+    <string name="no_order">You have not ordered anything. Please order something before submitting the order.</string>
 </resources>

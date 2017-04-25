@@ -21,6 +21,7 @@ import com.example.terz99.digitalmenuv2.OrderItem;
 import com.example.terz99.digitalmenuv2.R;
 import com.example.terz99.digitalmenuv2.data.OrderContract;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -97,7 +98,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
             }
         });
 
-        holder.priceTextView.setText(String.valueOf(fullPrice) + "$");
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        holder.priceTextView.setText(String.valueOf(decimalFormat.format(fullPrice)) + "$");
     }
 
     @Override
