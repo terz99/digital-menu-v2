@@ -6,9 +6,12 @@
         android:color="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/CV">
-        <!--style="@style/MyCardViewStyle">-->
+        android:id="@+id/CV"
+        style="@style/MyCardViewStyle">
+
+
         <LinearLayout
+            android:baselineAligned="false"
             android:layout_width="match_parent"
             android:id="@+id/LL"
             android:layout_height="@dimen/card_height"
@@ -102,7 +105,7 @@
                     android:layout_margin="@dimen/regular_margin"
                     android:layout_alignParentTop="true"
                     android:id="@+id/add_button"
-                    android:text="ADD"
+                    android:text="ADD TO ORDER"
                     android:textSize="@dimen/text_size"
                     android:gravity="center"
                     android:background="@android:color/transparent"
@@ -126,12 +129,11 @@
                     android:id="@+id/price_textview"
                     tools:text="Example Price"
                     android:layout_alignParentBottom="true"
-                    android:layout_toRightOf="@+id/arrows_bar"
-                    android:layout_toEndOf="@+id/arrows_bar"
+                    android:layout_alignParentRight="true"
                     android:layout_marginBottom="@dimen/regular_margin"
                     android:layout_marginLeft="@dimen/regular_margin"
                     android:layout_marginRight="@dimen/regular_margin"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/other_text_size"/>
 
 
 
