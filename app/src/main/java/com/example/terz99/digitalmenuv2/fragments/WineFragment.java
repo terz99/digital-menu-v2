@@ -1,6 +1,8 @@
 package com.example.terz99.digitalmenuv2.fragments;
 
 
+import android.database.Cursor;
+import android.net.wifi.p2p.nsd.WifiP2pUpnpServiceInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.terz99.digitalmenuv2.Item;
 import com.example.terz99.digitalmenuv2.R;
 import com.example.terz99.digitalmenuv2.adapters.ItemAdapter;
+import com.example.terz99.digitalmenuv2.data.MenuContract;
 
 import java.util.ArrayList;
 
@@ -22,8 +25,11 @@ import java.util.ArrayList;
  */
 public class WineFragment extends Fragment {
 
+    // Category id
+    public static final int WINE_ID = 2;
 
     private static final String TAG = WineFragment.class.getSimpleName();
+    public static Cursor mData;
 
     private ArrayList<Item> cacheList = null;
     private ArrayList<Item> words;
@@ -75,15 +81,22 @@ public class WineFragment extends Fragment {
     private ArrayList<Item> addData() {
 
         ArrayList<Item> words = new ArrayList<Item>();
-        words.add(new Item("Reisling", 33.75, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
-        words.add(new Item("Ge", 32.30, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
-        words.add(new Item("Chardonnay", 31.90, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
-        words.add(new Item("Sauvigon Blanc", 24.50, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
-        words.add(new Item("Syrah", 22.60, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
-        words.add(new Item("Merlot", 23.60, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
-        words.add(new Item("Cabernet Saubignon", 25.20, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
-        words.add(new Item("Pinot Noir", 31.90, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,2));
 
+        if(mData != null){
+
+            mData.moveToFirst();
+
+            do{
+
+                String name = mData.getString(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_NAME));
+                String description = mData.getString(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_DESCRIPTION));
+                double price = Double.parseDouble(mData.getString(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_PRICE)));
+                int imageId = mData.getInt(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_PHOTO_ID));
+
+                words.add(new Item(name, price, description, imageId, WINE_ID));
+
+            } while(mData.moveToNext());
+        }
 
         return words;
     }

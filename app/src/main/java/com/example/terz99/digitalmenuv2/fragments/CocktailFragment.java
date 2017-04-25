@@ -1,6 +1,7 @@
 package com.example.terz99.digitalmenuv2.fragments;
 
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.terz99.digitalmenuv2.Item;
 import com.example.terz99.digitalmenuv2.R;
 import com.example.terz99.digitalmenuv2.adapters.ItemAdapter;
+import com.example.terz99.digitalmenuv2.data.MenuContract;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,7 @@ public class CocktailFragment extends Fragment {
     public static final int COCKTAIL_ID = 1;
 
     private static final String TAG = CocktailFragment.class.getSimpleName();
+    public static Cursor mData;
 
     private ArrayList<Item> cacheList = null;
     private ArrayList<Item> words;
@@ -76,49 +79,23 @@ public class CocktailFragment extends Fragment {
     private ArrayList<Item> addData() {
 
         ArrayList<Item> words = new ArrayList<Item>();
-        words.add(new Item("Lavender White Lady", 10.60, "4cl - Appleton Estate Rum, " +
-                "Orange curacao, Lime juice, Orgeat, Grenadine, Pineapple juice",
-                R.drawable.lavender_white_lady,
-                COCKTAIL_ID));
-        words.add(new Item("Absolut Gangster", 12.60, "4 cl - Absolut Elyx, " +
-                "Lillet, " +
-                "Sugar Syrup, " +
-                "Vanilla Bitters", R.drawable.absolut_gangster, COCKTAIL_ID));
-        words.add(new Item("Lavender Spring Sour", 11.40, "4cl - Vodka, Orange Juice, Lime.",
-                R.drawable.lavender_spring_sour,
-                COCKTAIL_ID));
-        words.add(new Item("Hendrick's Summer Garden", 14.60, "4cl - Vodka, rum, brandy.",
-                R.drawable.henrick_summer_gardem,
-                COCKTAIL_ID));
-        words.add(new Item("Mai Tai", 11.20, "4cl - Appleton 15 Year Old Rum" +
-                "Lime juice, " +
-                "Orgeat, " +
-                "Sugar syrup, " +
-                "Orange curacao, " +
-                "1 Mint leaf.", R.drawable.mai_tai, COCKTAIL_ID));
-        words.add(new Item("Lychee Collins", 10.50, "4cl - Beefeater Gin, " +
-                "Lychee liqueur, " +
-                "Lychee juice.", R.drawable.lychee_collins,
-                COCKTAIL_ID));
-        words.add(new Item("Passion Rum Punch", 10.40, "4cl - Appleton Estate Rum, " +
-                "Orange curacao, " +
-                "Lime juice, " +
-                "Orgeat, " +
-                "Grenadine, " +
-                "Pineapple juice.", R.drawable.passion_rum_punch,
-                COCKTAIL_ID));
-        words.add(new Item("El Hefe", 12.70, "4cl - Plantation Guatemala & Belize Rum" +
-                "Lillet, " +
-                "Maraschino Syrup, " +
-                "Dry Curacao.", R.drawable.el_jefe, COCKTAIL_ID));
-        words.add(new Item("Wild Berry Spritzer", 10.00, "4cl - Vodka, rum, brandy",
-                R.drawable.wild_berry_spritzer,
-                COCKTAIL_ID));
-        words.add(new Item("Hunter's Grog", 12.90, "Grapefruit Juice, " +
-                "Lemon Juice, " +
-                "Bitter Orange Marmalade, " +
-                "Ginger Beer.", R.drawable.hunter_grog,
-                COCKTAIL_ID));
+
+        if(mData != null){
+
+            mData.moveToFirst();
+
+            do{
+
+                String name = mData.getString(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_NAME));
+                String description = mData.getString(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_DESCRIPTION));
+                double price = Double.parseDouble(mData.getString(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_PRICE)));
+                int imageId = mData.getInt(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_PHOTO_ID));
+
+                words.add(new Item(name, price, description, imageId, COCKTAIL_ID));
+
+            } while(mData.moveToNext());
+        }
+
         return words;
     }
 

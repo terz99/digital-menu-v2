@@ -190,7 +190,7 @@ public class Provider extends ContentProvider{
                 id = db.insert(MenuContract.MenuEntry.TABLE_NAME, null, values);
 
                 // If the id is -1 then the insertion failed
-                if(id != -1){
+                if(id == -1){
                     Log.i(TAG, "Failed to insert element in menu database: " + uri.toString());
                     return null;
                 }

@@ -1,8 +1,13 @@
 package com.example.terz99.digitalmenuv2.fragments;
 
 
+import android.content.Context;
+import android.content.CursorLoader;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,14 +18,20 @@ import android.view.ViewGroup;
 import com.example.terz99.digitalmenuv2.Item;
 import com.example.terz99.digitalmenuv2.R;
 import com.example.terz99.digitalmenuv2.adapters.ItemAdapter;
+import com.example.terz99.digitalmenuv2.data.MenuContract;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PizzaFragment extends Fragment {
+public class PizzaFragment extends Fragment{
 
+    // Cursor for the data fetched from the database
+    public static Cursor mData;
+
+    // Category id
+    public static final int PIZZA_ID = 0;
 
     private static final String TAG = PizzaFragment.class.getSimpleName();
 
@@ -75,16 +86,26 @@ public class PizzaFragment extends Fragment {
     private ArrayList<Item> addData() {
 
         ArrayList<Item> words = new ArrayList<Item>();
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano,0));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
-        words.add(new Item("Pizza", 15.65, "Salami, cheese, mushrooms", R.mipmap.ic_launcher,0));
+
+        if(mData != null){
+
+            mData.moveToFirst();
+
+            do{
+
+                String name = mData.getString(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_NAME));
+                String description = mData.getString(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_DESCRIPTION));
+                double price = Double.parseDouble(mData.getString(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_PRICE)));
+                int imageId = mData.getInt(mData.getColumnIndex(MenuContract.MenuEntry.COLUMN_PHOTO_ID));
+
+                words.add(new Item(name, price, description, imageId, PIZZA_ID));
+
+            } while(mData.moveToNext());
+        }
+
         return words;
     }
+
+
+
 }

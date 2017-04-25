@@ -33,6 +33,10 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".preferences.SharedPreferencesActivity"></activity>
+        <provider
+            android:authorities="com.example.terz99.digitalmenuv2.data"
+            android:name="com.example.terz99.digitalmenuv2.data.Provider"
+            android:exported="false"/>
     </application>
 
 </manifest>
