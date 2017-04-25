@@ -101,31 +101,33 @@
 
                 </LinearLayout>
 
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/arrows_bar"
-                    android:layout_toEndOf="@+id/arrows_bar"
-                    android:layout_margin="@dimen/regular_margin"
-                    android:layout_alignParentTop="true"
-                    android:id="@+id/add_button"
-                    android:text="ADD TO ORDER"
-                    android:textSize="@dimen/text_size"
-                    android:gravity="center"
-                    android:background="@android:color/transparent"
-                    />
-
                 <ImageButton
                     android:id="@+id/info_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="@dimen/regular_margin"
+                    android:src="@drawable/ic_info_black_36dp"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:background="@android:color/transparent"
                     android:layout_margin="@dimen/regular_margin"
-                    android:src="@drawable/info_icon_2"/>
+                    android:id="@+id/add_button"
+                    android:src="@drawable/ic_add_circle_black_36dp"
+
+
+                    android:background="@android:color/transparent"
+                    />
 
                 <TextView
 
@@ -133,12 +135,13 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/price_textview"
                     tools:text="Example Price"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="@dimen/regular_margin"
+                    android:layout_toRightOf="@+id/arrows_bar"
+                    android:layout_toEndOf="@+id/arrows_bar"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/regular_margin"
-                    android:layout_marginRight="@dimen/regular_margin"
-                    android:textSize="@dimen/other_text_size"/>
+                    android:layout_marginStart="@dimen/regular_margin"
+                    android:textSize="@dimen/text_size"/>
+
 
 
 

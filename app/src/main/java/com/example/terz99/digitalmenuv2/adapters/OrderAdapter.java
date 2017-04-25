@@ -121,7 +121,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
                     };
                     mContext.getContentResolver().delete(OrderContract.OrderEntry.CONTENT_URI, selection, selectionArgs);
                     mData.remove(position);
-                    Toast.makeText(mContext, R.string.deletion_successful, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, currOrderItem.getmName() + " " +  mContext.getString(R.string.deletion_successful), Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
                 }
             });

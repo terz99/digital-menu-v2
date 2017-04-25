@@ -5,6 +5,6 @@
     <dimen name="button_dimens">96dp</dimen>
     <dimen name="gradien_height">83.3dp</dimen>
     <dimen name="regular_margin">32dp</dimen>
-    <dimen name="text_size">20sp</dimen>
+    <dimen name="text_size">24sp</dimen>
     <dimen name="other_text_size">32sp</dimen>
 </resources>

@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.terz99.digitalmenuv2.Item;
 import com.example.terz99.digitalmenuv2.MyOrderActivity;
@@ -145,6 +146,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(mContext,  currItem.getmName() + " " + mContext.getString(R.string.add_button_clicked), Toast.LENGTH_LONG).show();
+
 
                 /**
                  * Insert/update data to the orderr table
@@ -310,7 +314,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         ImageButton buttonUp;
         LinearLayout mLinearLayout;
         CardView mCardView;
-        Button mAddButton;
+        ImageButton mAddButton;
         LinearLayout mPopDown;
         TextView dTextview;
         CardView dCardView;
@@ -345,7 +349,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
             dCardView.setVisibility(View.GONE);
 
-            mAddButton = (Button) itemView.findViewById(R.id.add_button);
+            mAddButton = (ImageButton) itemView.findViewById(R.id.add_button);
         }
     }
 
