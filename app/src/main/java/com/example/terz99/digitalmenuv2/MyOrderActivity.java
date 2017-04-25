@@ -1,21 +1,36 @@
 package com.example.terz99.digitalmenuv2;
 
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.terz99.digitalmenuv2.adapters.OrderAdapter;
+import com.example.terz99.digitalmenuv2.data.OrderContract;
+
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 
-public class MyOrderActivity extends AppCompatActivity {
+public class MyOrderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+
+    private static final int ORDER_LOADER_ID = 10;
+
+    private RecyclerView mRecyclerView;
+
+    private OrderAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +56,8 @@ public class MyOrderActivity extends AppCompatActivity {
 
             }
         });
+
+        getSupportLoaderManager().initLoader(ORDER_LOADER_ID, null, this);
     }
 
     /**
@@ -97,5 +114,62 @@ public class MyOrderActivity extends AppCompatActivity {
         Canvas canvas = new Canvas(image);
         canvas.drawText(text, 0, baseline, paint);
         return image;
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+        switch (id){
+
+            case ORDER_LOADER_ID:
+
+                String[] projection = {
+                        OrderContract.OrderEntry.COLUMN_NAME,
+                        OrderContract.OrderEntry.COLUMN_PRICE,
+                        OrderContract.OrderEntry.COLUMN_QUANTITY,
+                        OrderContract.OrderEntry.COLUMN_PHOTO_ID
+                };
+
+                return new CursorLoader(this,
+                        OrderContract.OrderEntry.CONTENT_URI,
+                        projection,
+                        null,
+                        null,
+                        null);
+
+            default:
+                throw new IllegalArgumentException("Unknown loader id: " + id);
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+        switch (loader.getId()){
+
+            case ORDER_LOADER_ID:
+                setupContent(data);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown uri id: " + loader.getId());
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+    void setupContent(Cursor cursor){
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.o_listview);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        mRecyclerView.setHasFixedSize(true);
+
+        mAdapter = new OrderAdapter(this, cursor);
+
+        mRecyclerView.setAdapter(mAdapter);
     }
 }
