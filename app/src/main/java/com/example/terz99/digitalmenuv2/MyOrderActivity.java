@@ -1,5 +1,6 @@
 package com.example.terz99.digitalmenuv2;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.terz99.digitalmenuv2.adapters.OrderAdapter;
+import com.example.terz99.digitalmenuv2.data.BillContract;
 import com.example.terz99.digitalmenuv2.data.OrderContract;
 
 import java.util.ArrayList;
@@ -97,8 +99,73 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
         alertDialBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MyOrderActivity.this, R.string.order_successful, Toast.LENGTH_LONG)
-                        .show();
+
+                // Check if there are items to be ordered
+                if(mData == null || mData.size() == 0){
+                    Toast.makeText(MyOrderActivity.this, R.string.no_order, Toast.LENGTH_SHORT).show();
+                } else {
+
+                    for(int i = 0; i < mData.size(); i++){
+
+                        // Get link from the current item
+                        OrderItem currItem = mData.get(i);
+
+                        /**
+                         * Add all the values to a ContentValues object, except for the quantity value
+                         * Quantity value is put in the ContentValues later in the object
+                         */
+                        ContentValues contentValues = new ContentValues();
+
+                        contentValues.put(BillContract.BillEntry.COLUMN_NAME, currItem.getmName());
+                        contentValues.put(BillContract.BillEntry.COLUMN_PHOTO_ID, currItem.getmImageId());
+                        contentValues.put(BillContract.BillEntry.COLUMN_PRICE, String.valueOf(currItem.getmPrice()));
+
+                        /**
+                         * Write projection, selection and selectionArgs
+                         * The projection is needed when we check the bill database whether or not it already consist of an item
+                         * identical to currItem. If so, then we update this item in the bill database, otherwise we insert it
+                         */
+                        String[] projection = {
+                                BillContract.BillEntry.COLUMN_NAME,
+                                BillContract.BillEntry.COLUMN_QUANTITY
+                        };
+
+                        String selection = BillContract.BillEntry.COLUMN_NAME + "=?";
+
+                        String[] selectionArgs = {
+                                currItem.getmName()
+                        };
+
+                        // Check whether or not there is an item in the bill database identical to the bill database
+                        Cursor checkForItem = getContentResolver().query(BillContract.BillEntry.CONTENT_URI,
+                                projection,
+                                selection,
+                                selectionArgs,
+                                null);
+
+                        // If there is an identical item update the bill database
+                        if(checkForItem != null && checkForItem.getCount() > 0){
+
+                            checkForItem.moveToNext();
+                            // Add the previous quantity and the new quantity and then update the item in the bill database
+                            int previousQuantity = checkForItem.getInt(checkForItem.getColumnIndex(BillContract.BillEntry.COLUMN_QUANTITY));
+                            contentValues.put(BillContract.BillEntry.COLUMN_QUANTITY, previousQuantity + currItem.getmQuantity());
+                            getContentResolver().update(BillContract.BillEntry.CONTENT_URI, contentValues, selection, selectionArgs);
+                        } else { // Otherwise, insert another row/item in the bill database
+                            contentValues.put(BillContract.BillEntry.COLUMN_QUANTITY, currItem.getmQuantity());
+                            getContentResolver().insert(BillContract.BillEntry.CONTENT_URI, contentValues);
+                        }
+                    }
+
+                    // Delete all sources of data from the MyOrderActivity since the order has been submitted already
+                    mData = null;
+                    getContentResolver().delete(OrderContract.OrderEntry.CONTENT_URI, null, null);
+
+                    // Toast a message to the user that the order has been submitted successfully
+                    Toast.makeText(MyOrderActivity.this, R.string.order_successful, Toast.LENGTH_SHORT).show();
+                }
+
+                // Return to MainActivty
                 finish();
             }
         });
