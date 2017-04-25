@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.example.terz99.digitalmenuv2.adapters.CategoryAdapter;
 import com.example.terz99.digitalmenuv2.data.MenuContract;
 import com.example.terz99.digitalmenuv2.data.MenuDbHelper;
+import com.example.terz99.digitalmenuv2.data.OrderContract;
 import com.example.terz99.digitalmenuv2.fragments.CocktailFragment;
 import com.example.terz99.digitalmenuv2.fragments.PizzaFragment;
 import com.example.terz99.digitalmenuv2.fragments.WineFragment;

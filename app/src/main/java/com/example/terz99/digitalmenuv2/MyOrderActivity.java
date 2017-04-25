@@ -1,5 +1,6 @@
 package com.example.terz99.digitalmenuv2;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.graphics.Paint;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
@@ -16,21 +18,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.terz99.digitalmenuv2.adapters.OrderAdapter;
 import com.example.terz99.digitalmenuv2.data.OrderContract;
 
+import java.util.ArrayList;
+
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 
-public class MyOrderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MyOrderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<OrderItem>>{
+
+    private static final String TAG = MyOrderActivity.class.getSimpleName();
 
     private static final int ORDER_LOADER_ID = 10;
 
     private RecyclerView mRecyclerView;
 
     private OrderAdapter mAdapter;
+
+    private ArrayList<OrderItem> mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +66,11 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-        getSupportLoaderManager().initLoader(ORDER_LOADER_ID, null, this);
+        if(mData == null || mData.size() == 0) {
+            getSupportLoaderManager().initLoader(ORDER_LOADER_ID, null, this);
+        } else {
+            setupContent();
+        }
     }
 
     /**
@@ -116,51 +129,7 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
         return image;
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-
-        switch (id){
-
-            case ORDER_LOADER_ID:
-
-                String[] projection = {
-                        OrderContract.OrderEntry.COLUMN_NAME,
-                        OrderContract.OrderEntry.COLUMN_PRICE,
-                        OrderContract.OrderEntry.COLUMN_QUANTITY,
-                        OrderContract.OrderEntry.COLUMN_PHOTO_ID
-                };
-
-                return new CursorLoader(this,
-                        OrderContract.OrderEntry.CONTENT_URI,
-                        projection,
-                        null,
-                        null,
-                        null);
-
-            default:
-                throw new IllegalArgumentException("Unknown loader id: " + id);
-        }
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
-        switch (loader.getId()){
-
-            case ORDER_LOADER_ID:
-                setupContent(data);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown uri id: " + loader.getId());
-        }
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
-
-    void setupContent(Cursor cursor){
+    void setupContent(){
 
         mRecyclerView = (RecyclerView) findViewById(R.id.o_listview);
 
@@ -168,8 +137,76 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
 
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new OrderAdapter(this, cursor);
+        mAdapter = new OrderAdapter(this, mData);
 
         mRecyclerView.setAdapter(mAdapter);
     }
+
+    @Override
+    public Loader<ArrayList<OrderItem>> onCreateLoader(int id, Bundle args) {
+
+        switch (id){
+
+            case ORDER_LOADER_ID:
+                return new FetchDataTask(this);
+            default:
+                throw new IllegalArgumentException("Unknown loader id " + id);
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<ArrayList<OrderItem>> loader, ArrayList<OrderItem> data) {
+        mData = data;
+        setupContent();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<ArrayList<OrderItem>> loader) {
+        mData = null;
+    }
+
+    public static class FetchDataTask extends AsyncTaskLoader<ArrayList<OrderItem>>{
+
+        Context sContext;
+
+        public FetchDataTask(Context context) {
+            super(context);
+            sContext = context;
+        }
+
+        @Override
+        public ArrayList<OrderItem> loadInBackground() {
+
+            Cursor cursor;
+
+            String[] projection = {
+                    OrderContract.OrderEntry.COLUMN_NAME,
+                    OrderContract.OrderEntry.COLUMN_PRICE,
+                    OrderContract.OrderEntry.COLUMN_QUANTITY,
+                    OrderContract.OrderEntry.COLUMN_PHOTO_ID
+            };
+
+            cursor = sContext.getContentResolver().query(OrderContract.OrderEntry.CONTENT_URI, projection, null, null, null);
+
+            ArrayList<OrderItem> data = new ArrayList<OrderItem>();
+
+            while (cursor.moveToNext()){
+
+                String name = cursor.getString(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_NAME));
+                int imageId = cursor.getInt(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_PHOTO_ID));
+                double price = Double.parseDouble(cursor.getString(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_PRICE)));
+                int quantity = cursor.getInt(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_QUANTITY));
+
+                data.add(new OrderItem(name, price, quantity, imageId));
+            }
+
+            return data;
+        }
+
+        @Override
+        protected void onStartLoading() {
+            forceLoad();
+        }
+    }
+
 }

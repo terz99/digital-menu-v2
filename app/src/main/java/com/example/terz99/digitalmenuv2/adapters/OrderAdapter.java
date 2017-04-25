@@ -26,20 +26,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
 
     private ArrayList<OrderItem> mData;
 
-    public OrderAdapter(Context context, Cursor cursor){
+    public OrderAdapter(Context context, ArrayList<OrderItem> data){
         mContext = context;
-
-        mData = new ArrayList<OrderItem>();
-
-        while(cursor.moveToNext()){
-
-            String name = cursor.getString(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_NAME));
-            int quantity = cursor.getInt(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_QUANTITY));
-            double price = Double.parseDouble(cursor.getString(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_PRICE)));
-            int imageId = cursor.getInt(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_PHOTO_ID));
-
-            mData.add(new OrderItem(name, price, quantity, imageId));
-        }
+        mData = data;
     }
 
     @Override
@@ -60,7 +49,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
 
         double fullPrice = currOrderItem.getmPrice()*(double)currOrderItem.getmQuantity();
 
-        holder.priceTextView.setText(String.valueOf(fullPrice));
+        holder.priceTextView.setText(String.valueOf(fullPrice) + "$");
     }
 
     @Override

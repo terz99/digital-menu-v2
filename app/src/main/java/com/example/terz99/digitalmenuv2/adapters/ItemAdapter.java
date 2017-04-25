@@ -1,6 +1,8 @@
 package com.example.terz99.digitalmenuv2.adapters;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,12 +10,15 @@ import android.graphics.Canvas;
 import android.graphics.Picture;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.PictureDrawable;
+import android.support.annotation.IntegerRes;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,16 +26,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.terz99.digitalmenuv2.Item;
+import com.example.terz99.digitalmenuv2.MyOrderActivity;
 import com.example.terz99.digitalmenuv2.R;
+import com.example.terz99.digitalmenuv2.data.MenuContract;
+import com.example.terz99.digitalmenuv2.data.OrderContract;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
 
 /**
  * Created by terz99 on 3/15/17.
  */
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder>{
+
+    private static final String TAG = ItemAdapter.class.getSimpleName();
 
     private Context mContext;
 
@@ -109,6 +120,24 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         });
 
         holder.mCardView.setPreventCornerOverlap(false);
+
+        holder.mAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ContentValues contentValues = new ContentValues();
+
+                contentValues.put(OrderContract.OrderEntry.COLUMN_NAME, currItem.getmName());
+                contentValues.put(OrderContract.OrderEntry.COLUMN_DESCRIPTION, currItem.getmDescription());
+                contentValues.put(OrderContract.OrderEntry.COLUMN_PRICE, String.valueOf(currItem.getmPrice()));
+                contentValues.put(OrderContract.OrderEntry.COLUMN_QUANTITY, Integer.parseInt(IVHolder.counterTextView.getText().toString()));
+                contentValues.put(OrderContract.OrderEntry.COLUMN_PHOTO_ID, currItem.getmImageId());
+
+                mContext.getContentResolver().insert(OrderContract.OrderEntry.CONTENT_URI, contentValues);
+
+                Log.e(TAG, "Added " + contentValues.toString());
+            }
+        });
     }
 
     @Override
@@ -127,6 +156,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         ImageButton buttonUp;
         LinearLayout mLinearLayout;
         CardView mCardView;
+        Button mAddButton;
 
         public ItemViewHolder(final View itemView) {
             super(itemView);
@@ -139,11 +169,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             counterTextView = (TextView) itemView.findViewById(R.id.counter_textview);
             buttonUp = (ImageButton) itemView.findViewById(R.id.top_button);
             buttonDown = (ImageButton) itemView.findViewById(R.id.bottom_button);
-
+            mAddButton = (Button) itemView.findViewById(R.id.add_button);
         }
-
-
-
     }
 
 
