@@ -15,7 +15,7 @@ public class OrderContract {
     // URI which represents the scheme and the authority of the content URI
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     // The path of the table
-    public static final String PATH_ORDER = "order";
+    public static final String PATH_ORDER = "orderr";
 
     public static class OrderEntry implements BaseColumns{
 
@@ -34,7 +34,7 @@ public class OrderContract {
                 .build();
 
         // The name of the table. This name has to be the same as the path of the order (PATH_ORDER)
-        public static final String TABLE_NAME = "order";
+        public static final String TABLE_NAME = "orderr";
 
 
         // The name of the name column
