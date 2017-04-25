@@ -96,7 +96,7 @@
 
 
             <ImageButton
-                android:id="@+id/info_button"
+                android:id="@+id/clear_button"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
 
@@ -105,7 +105,7 @@
                 android:layout_alignParentTop="true"
                 android:background="@android:color/transparent"
                 android:layout_margin="@dimen/regular_margin"
-                android:src="@drawable/info_icon_2"/>
+                android:src="@drawable/ic_clear_black_24dp"/>
 
             <TextView
 
