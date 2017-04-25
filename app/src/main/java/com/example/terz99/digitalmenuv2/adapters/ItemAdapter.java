@@ -20,6 +20,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -148,24 +152,86 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             }
         });
 
+
+
+        holder.dTextview.setText(String.valueOf(currItem.getmDescription()));
+
         holder.mCardView.setPreventCornerOverlap(false);
 
-        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+
+
+        holder.mInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!timesclicked) {
-                    holder.mCardView.setCardElevation(getPixelsFromDPs(10));
+                    holder.mCardView.setCardElevation(getPixelsFromDPs(8));
+                    expand(holder.dCardView);
                     timesclicked = true;
                 }
                 else {
                     holder.mCardView.setCardElevation(getPixelsFromDPs(2));
                     timesclicked = false;
+                    collapse(holder.dCardView);
                 }
             }
         });
 
     }
 
+    public static void expand(final View v) {
+        v.measure(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        final int targetHeight = v.getMeasuredHeight();
+
+
+        v.getLayoutParams().height = 1;
+        v.setVisibility(View.VISIBLE);
+        Animation a = new Animation()
+        {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                v.getLayoutParams().height = interpolatedTime == 1
+                        ? WindowManager.LayoutParams.WRAP_CONTENT
+                        : (int)(targetHeight * interpolatedTime);
+                v.requestLayout();
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+        a.setDuration(100);
+        //a.setDuration((int) (targetHeight / v.getContext().getResources().getDisplayMetrics().density));
+        v.startAnimation(a);
+    }
+
+    public static void collapse(final View v) {
+        final int initialHeight = v.getMeasuredHeight();
+
+        Animation a = new Animation()
+        {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                if(interpolatedTime == 1){
+                    v.setVisibility(View.GONE);
+                }else{
+                    v.getLayoutParams().height = initialHeight - (int)(initialHeight * interpolatedTime);
+                    v.requestLayout();
+                }
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+
+        a.setDuration(100);
+        //a.setDuration((int)(initialHeight / v.getContext().getResources().getDisplayMetrics().density));
+        v.startAnimation(a);
+    }
     private int getPixelsFromDPs(int dps) {
 
         Resources r = mContext.getResources();
@@ -194,6 +260,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         LinearLayout mLinearLayout;
         CardView mCardView;
         Button mAddButton;
+        LinearLayout mPopDown;
+        TextView dTextview;
+        CardView dCardView;
+        ImageButton mInfoButton;
 
         public ItemViewHolder(final View itemView) {
             super(itemView);
@@ -206,10 +276,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             counterTextView = (TextView) itemView.findViewById(R.id.counter_textview);
             buttonUp = (ImageButton) itemView.findViewById(R.id.top_button);
             buttonDown = (ImageButton) itemView.findViewById(R.id.bottom_button);
+            mPopDown = (LinearLayout) itemView.findViewById(R.id.pop_up_card);
+            dCardView = (CardView) itemView.findViewById(R.id.cardview_down);
+            dTextview = (TextView) itemView.findViewById(R.id.desctription);
+            mInfoButton = (ImageButton) itemView.findViewById(R.id.info_button);
 
             mCardView.setMaxCardElevation(getPixelsFromDPs(10));
             mCardView.setPreventCornerOverlap(false);
             mCardView.setCardElevation(getPixelsFromDPs(2));
+            dCardView.setMaxCardElevation(getPixelsFromDPs(10));
+            dCardView.setPreventCornerOverlap(false);
+            dCardView.setCardElevation(2);
+
+            dCardView.setVisibility(View.GONE);
 
             mAddButton = (Button) itemView.findViewById(R.id.add_button);
         }
