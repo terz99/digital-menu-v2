@@ -13,7 +13,7 @@ public class BillContract {
     // String which represents the authority of the content URI
     public static final String CONTENT_AUTHORITY = "com.example.terz99.digitalmenuv2.data";
     // URI which represents the scheme and the authority of the content URI
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     // The path of the table
     public static final String PATH_BILL = "bill";
 

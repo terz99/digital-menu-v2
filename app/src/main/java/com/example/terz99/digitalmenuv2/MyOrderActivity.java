@@ -39,8 +39,6 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
 
     private static final int ORDER_LOADER_ID = 10;
 
-    private RecyclerView mRecyclerView;
-
     private OrderAdapter mAdapter;
 
     private ArrayList<OrderItem> mData;
@@ -158,6 +156,8 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
                             contentValues.put(BillContract.BillEntry.COLUMN_QUANTITY, currItem.getmQuantity());
                             getContentResolver().insert(BillContract.BillEntry.CONTENT_URI, contentValues);
                         }
+
+                        checkForItem.close();
                     }
 
                     // Delete all sources of data from the MyOrderActivity since the order has been submitted already
@@ -202,7 +202,7 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
 
     void setupContent(){
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.o_listview);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.o_listview);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -236,7 +236,7 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
         mData = null;
     }
 
-    public static class FetchDataTask extends AsyncTaskLoader<ArrayList<OrderItem>>{
+    private static class FetchDataTask extends AsyncTaskLoader<ArrayList<OrderItem>>{
 
         Context sContext;
 

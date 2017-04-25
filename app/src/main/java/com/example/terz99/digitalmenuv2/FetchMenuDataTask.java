@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 class FetchMenuDataTask extends AsyncTaskLoader<ArrayList<Item>> {
 
-    Context sContext;
+    private Context sContext;
 
     @Override
     protected void onStartLoading() {
@@ -55,6 +55,10 @@ class FetchMenuDataTask extends AsyncTaskLoader<ArrayList<Item>> {
             int categoryId = cursor.getInt(cursor.getColumnIndex(MenuContract.MenuEntry.COLUMN_CATEGORY_ID));
 
             data.add(new Item(name, price, description, imageId, categoryId));
+        }
+
+        if (cursor != null) {
+            cursor.close();
         }
 
         return data;

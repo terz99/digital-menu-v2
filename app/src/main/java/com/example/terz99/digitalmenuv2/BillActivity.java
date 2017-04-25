@@ -37,9 +37,6 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
     // Array list which stores the data from the bill database
     private ArrayList<OrderItem> mData;
 
-    // Object instance for the Recyclerview
-    private RecyclerView mRecyclerView;
-
     // Adapter used for displaying the data from mData on the UI
     private OrderAdapter mAdapter;
 
@@ -157,7 +154,7 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void setupContent() {
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.b_listview);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.b_listview);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 

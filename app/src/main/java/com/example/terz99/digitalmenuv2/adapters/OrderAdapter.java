@@ -56,9 +56,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
     private int getPixelsFromDPs(int dps) {
 
         Resources r = mContext.getResources();
-        int  px = (int) (TypedValue.applyDimension(
+        return (int) (TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, dps, r.getDisplayMetrics()));
-        return px;
 
     }
 
