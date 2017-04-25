@@ -1,5 +1,12 @@
 package com.example.terz99.digitalmenuv2;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v7.graphics.Palette;
+
+import static java.security.AccessController.getContext;
+
 /**
  * Created by terz99 on 4/17/17.
  */
@@ -12,6 +19,11 @@ public class Item {
     private int mImageId;
     private int mCounter;
     private int mCategoryId;
+    private int extracted_color;
+
+
+
+
 
     public Item(String mName, double mPrice, String mDescription, int mImageId, int mCategoryId) {
         this.mName = mName;
@@ -20,6 +32,7 @@ public class Item {
         this.mImageId = mImageId;
         mCounter = 1;
         this.mCategoryId = mCategoryId;
+
     }
 
     public String getmName() {
@@ -44,6 +57,10 @@ public class Item {
 
     public int getmCategoryId() {
         return mCategoryId;
+    }
+
+    public int getExtracted_color() {
+        return extracted_color;
     }
 
     public void setmCounter(int mCounter) {

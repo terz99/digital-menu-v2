@@ -31,6 +31,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity{
         // create the MainActivity layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
         if(checkDataBaseVersion()){
             addData();
@@ -293,6 +297,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void setupContent() {
 
+
         // get the viewpager
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         // declare a new adapter for the viewpager
@@ -303,6 +308,8 @@ public class MainActivity extends AppCompatActivity{
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         // set tabLayout in sync with the viewpager
         tabLayout.setupWithViewPager(viewPager);
+
+
     }
 
     private LoaderManager.LoaderCallbacks<Integer> uploadLoaderCallbacks = new LoaderManager.LoaderCallbacks<Integer>() {

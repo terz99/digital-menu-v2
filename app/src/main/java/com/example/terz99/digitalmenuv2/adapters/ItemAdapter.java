@@ -11,6 +11,7 @@ import android.graphics.drawable.PictureDrawable;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.example.terz99.digitalmenuv2.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by terz99 on 3/15/17.
@@ -33,12 +35,19 @@ import java.util.ArrayList;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder>{
 
     private Context mContext;
+    private boolean timesclicked = false;
 
     private ArrayList<Item> mList;
+
+   // private int PalleteList[] = new int[65536];
+
+
 
     public ItemAdapter(Context context, ArrayList<Item> list){
         mContext = context;
         mList = list;
+
+
     }
 
     @Override
@@ -54,7 +63,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder holder, int position) {
+    public void onBindViewHolder(final ItemViewHolder holder, int position) {
 
         final Item currItem = mList.get(position);
 
@@ -64,16 +73,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         holder.nameTextView.setText(currItem.getmName());
 
-        Bitmap myBitmap = BitmapFactory.decodeResource(mContext.getResources(), currItem.getmImageId());
-        if (myBitmap != null && !myBitmap.isRecycled()) {
-            Palette palette = Palette.from(myBitmap).generate();
+        if (holder.mLinearLayout.getBackground() == null){
 
-            int vibrant = palette.getVibrantColor(mContext.getResources().getColor(R.color.white));
-            int vibrantLight = palette.getLightVibrantColor(mContext.getResources().getColor(R.color.white));
-            int muted = palette.getMutedColor(mContext.getResources().getColor(R.color.white));
+            Bitmap myBitmap = BitmapFactory.decodeResource(mContext.getResources(), currItem.getmImageId());
+            if (myBitmap != null && !myBitmap.isRecycled()) {
+                Palette palette = Palette.from(myBitmap).generate();
 
-            holder.mLinearLayout.setBackgroundColor(muted);
+                int muted = palette.getMutedColor(mContext.getResources().getColor(R.color.white));
+
+                holder.mLinearLayout.setBackgroundColor(muted);
+            }
         }
+
 
 
 
@@ -108,7 +119,31 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             }
         });
 
-        holder.mCardView.setPreventCornerOverlap(false);
+
+
+
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!timesclicked) {
+                    holder.mCardView.setCardElevation(getPixelsFromDPs(10));
+                    timesclicked = true;
+                }
+                else {
+                    holder.mCardView.setCardElevation(getPixelsFromDPs(2));
+                    timesclicked = false;
+                }
+            }
+        });
+
+    }
+
+    private int getPixelsFromDPs(int dps) {
+
+        Resources r = mContext.getResources();
+        int  px = (int) (TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, dps, r.getDisplayMetrics()));
+        return px;
     }
 
     @Override
@@ -139,6 +174,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             counterTextView = (TextView) itemView.findViewById(R.id.counter_textview);
             buttonUp = (ImageButton) itemView.findViewById(R.id.top_button);
             buttonDown = (ImageButton) itemView.findViewById(R.id.bottom_button);
+
+            mCardView.setMaxCardElevation(getPixelsFromDPs(10));
+            mCardView.setPreventCornerOverlap(false);
+            mCardView.setCardElevation(getPixelsFromDPs(2));
 
         }
 

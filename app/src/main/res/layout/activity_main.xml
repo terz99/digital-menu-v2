@@ -19,29 +19,30 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:clipToPadding="false"
+
     tools:context="com.example.terz99.digitalmenuv2.MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@android:color/transparent">
-
-        <android.support.design.widget.TabLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/sliding_tabs"
-            app:tabMaxWidth="0dp"
-            app:tabMode="fixed"
-            app:tabGravity="fill"
-            app:tabBackground="@color/Tabs_color"
-            app:tabSelectedTextColor="@color/selected_text_color"
-            app:tabTextColor="@color/unselected_text_color"
-            app:tabIndicatorColor="@color/selected_text_color"/>
 
 
-    </LinearLayout>
+
+
+
+                <android.support.design.widget.TabLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sliding_tabs"
+                    app:tabMaxWidth="0dp"
+                     app:tabGravity="fill"
+                     app:tabBackground="@color/Tabs_color"
+                     app:tabSelectedTextColor="@color/selected_text_color"
+                     app:tabTextColor="@color/unselected_text_color"
+                     app:tabIndicatorColor="@color/selected_text_color"/>
+
+
+
+
 
 
     <android.support.v4.view.ViewPager
