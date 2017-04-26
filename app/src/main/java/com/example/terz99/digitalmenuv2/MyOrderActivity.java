@@ -222,11 +222,18 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
 
         setTotalPrice();
 
+        deletedItem = null;
+
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
             @Override
             public void onChanged() {
-                totalPrice -= deletedItem.getmPrice()*(double)deletedItem.getmQuantity();
-                setTotalPrice();
+
+                if(deletedItem != null){
+                    totalPrice -= deletedItem.getmPrice()*(double)deletedItem.getmQuantity();
+                    deletedItem = null;
+                    setTotalPrice();
+                }
             }
         });
     }
