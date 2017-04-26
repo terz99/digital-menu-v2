@@ -23,4 +23,7 @@
     <string name="add_button_clicked">has been added to MyOrder</string>
     <string name="refresh">Refresh</string>
     <string name="password_prompt">Type in the password:</string>
+    <string name="password">1234</string>
+    <string name="closing_dialog_msg">Bill and My Order have been successfully removed by a waiter.</string>
+    <string name="wrong_password">The password you typed was wrong. Please try again.</string>
 </resources>
