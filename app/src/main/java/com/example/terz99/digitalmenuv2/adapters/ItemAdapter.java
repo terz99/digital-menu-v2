@@ -117,7 +117,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.itemImageView.setMaxHeight(R.dimen.card_height);
         holder.itemImageView.setImageResource(currItem.getmImageId());
         holder.itemImageView.setVerticalFadingEdgeEnabled(true);
-        holder.itemImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        holder.itemImageView.setAdjustViewBounds(true);
+        holder.itemImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
         holder.nameTextView.setHeight( holder.itemImageView.getHeight()/4 );
 
         /**

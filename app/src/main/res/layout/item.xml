@@ -28,10 +28,9 @@
                 android:layout_height="@dimen/card_height">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerInside"
-                    android:adjustViewBounds="true"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+
                     android:id="@+id/picture"
 
                     >
@@ -111,7 +110,7 @@
                     android:layout_alignParentRight="true"
 
                     android:layout_alignParentEnd="true"
-                    android:layout_margin="@dimen/regular_margin"
+                    android:padding="@dimen/regular_margin"
                     android:src="@drawable/ic_info_black_36dp"/>
 
                 <ImageButton
@@ -121,7 +120,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_margin="@dimen/regular_margin"
+                    android:padding="@dimen/regular_margin"
                     android:id="@+id/add_button"
                     android:src="@drawable/ic_add_circle_black_36dp"
 

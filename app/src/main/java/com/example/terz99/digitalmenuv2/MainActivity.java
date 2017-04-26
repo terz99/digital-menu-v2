@@ -155,14 +155,27 @@ public class MainActivity extends AppCompatActivity{
                 COCKTAIL_ID));
 
         // Adding wines
-        mItems.add(new Item("Reisling", 33.75, "750ml", R.drawable.pizza_amerikano, WINE_ID));
-        mItems.add(new Item("Ge", 32.30, "750ml", R.drawable.pizza_amerikano, WINE_ID));
-        mItems.add(new Item("Chardonnay", 31.90, "750ml", R.drawable.pizza_amerikano, WINE_ID));
-        mItems.add(new Item("Sauvigon Blanc", 24.50, "750ml", R.drawable.pizza_amerikano, WINE_ID));
-        mItems.add(new Item("Syrah", 22.60, "750ml", R.drawable.pizza_amerikano, WINE_ID));
-        mItems.add(new Item("Merlot", 23.60, "750ml", R.drawable.pizza_amerikano, WINE_ID));
-        mItems.add(new Item("Cabernet Saubignon", 25.20, "750ml", R.drawable.pizza_amerikano, WINE_ID));
-        mItems.add(new Item("Pinot Noir", 31.90, "750ml", R.drawable.pizza_amerikano, WINE_ID));
+        mItems.add(new Item("Reisling", 33.75, "750ml" +
+                ", 100% Riesling from Columbia Valley, Washington (primarily the Evergreen Vineyard in the Ancient Lakes AVA and Zillah Ranch in Yakima Valley). The wine has a residual sugar level of 15.5 g/L." +
+                " 12.0% Alcohol.", R.drawable.riesling, WINE_ID));
+        mItems.add(new Item("Chardonnay", 31.90, "750ml," +
+                " 98% Chardonnay and 2% Viognier from California. The wine has a residual sugar of 3.2g/L." +
+                " 13.5% Alcohol.", R.drawable.chardonnay, WINE_ID));
+        mItems.add(new Item("Sauvigon Blanc", 24.50, "750ml" +
+                ", Sauvignon Blanc from Potter Valley, Mendocino County, California. Made with organically grown grapes. Fermented and aged in stainless steel." +
+                " 14% Alcohol.", R.drawable.sauvignon_blanc, WINE_ID));
+        mItems.add(new Item("Syrah", 22.60, "750ml" +
+                ", 100% Syrah from the Mirage, Canyon Vineyard Ranch, Waterbrook Estate and Skyfall Vineyards in Columbia Valley, Washington. The Waterbrook Syrah spends 10 months in 20% new American oak and 80% 2-5 year old American, French and Hungarian oak." +
+                " 13.4% Alcohol.", R.drawable.syrah, WINE_ID));
+        mItems.add(new Item("Merlot", 23.60, "750ml" +
+                ", 97% Merlot and 3% Malbec from Oakville, Carneros and Oak Knoll in Napa Valley, California. The wine spends 18 months in oak barrels." +
+                " 13.5% Alcohol.", R.drawable.merlot, WINE_ID));
+        mItems.add(new Item("Cabernet Saubignon", 25.20, "750ml" +
+                ", 85% Cabernet Sauvignon and 15% Merlot from Colchagua Valley, Chile. 45% of the wine is aged in French oak barrels for eight months. The wine has residual sugar of just 2.55 grams/liter." +
+                " 13.5% Alcohol.", R.drawable.cabernet_sauvignon, WINE_ID));
+        mItems.add(new Item("Pinot Noir", 31.90, "750ml" +
+                ", 95% Pinot Noir and 5% Barbera from California. The wine spends 10 months in 100% French oak (60% new, 40% seasoned)." +
+                " 13.5% Alcohol.", R.drawable.pinot_noir, WINE_ID));
 
         getSupportLoaderManager().initLoader(MENU_LOADER_ID, null, uploadLoaderCallbacks);
     }
