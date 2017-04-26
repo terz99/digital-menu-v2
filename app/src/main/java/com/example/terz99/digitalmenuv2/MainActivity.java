@@ -39,9 +39,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.terz99.digitalmenuv2.adapters.CategoryAdapter;
+import com.example.terz99.digitalmenuv2.data.BillContract;
 import com.example.terz99.digitalmenuv2.data.MenuContract;
 import com.example.terz99.digitalmenuv2.data.MenuDbHelper;
 import com.example.terz99.digitalmenuv2.data.OrderContract;
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity{
     public static ArrayList<Item> mWineData;
     public static ArrayList<Item> mCocktailData;
 
+
     // Log tag
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -75,8 +79,6 @@ public class MainActivity extends AppCompatActivity{
         // create the MainActivity layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
 
         if(checkDataBaseVersion()){
@@ -255,12 +257,25 @@ public class MainActivity extends AppCompatActivity{
 
         alertDialogBuilder.setCancelable(false);
 
-        alertDialogBuilder.setView(LayoutInflater.from(this).inflate(R.layout.password_prompt, null));
+        final View alertDialogView;
+        alertDialogView = LayoutInflater.from(this).inflate(R.layout.password_prompt, null);
+
+        alertDialogBuilder.setView(alertDialogView);
 
         alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                EditText passwordEditText = (EditText) alertDialogView.findViewById(R.id.password_prompt_edittext);
+                String typedPassword = passwordEditText.getText().toString();
+
+                if(typedPassword != null && typedPassword.equals(getString(R.string.password))){
+                    showConfirmationDialog();
+                } else {
+                    showDeniedDialog();
+                }
+
+                dialog.dismiss();
             }
         });
 
@@ -275,6 +290,61 @@ public class MainActivity extends AppCompatActivity{
         });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void showDeniedDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(R.string.wrong_password);
+
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+                showPasswordDialog();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void showConfirmationDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(R.string.closing_dialog_msg);
+
+        builder.setCancelable(false);
+
+        builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(dialog != null){
+                    dialog.dismiss();
+                }
+                getContentResolver().delete(OrderContract.OrderEntry.CONTENT_URI, null, null);
+                getContentResolver().delete(BillContract.BillEntry.CONTENT_URI, null, null);
+                finish();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
