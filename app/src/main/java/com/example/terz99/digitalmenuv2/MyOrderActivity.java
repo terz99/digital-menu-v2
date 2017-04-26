@@ -21,12 +21,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.terz99.digitalmenuv2.adapters.OrderAdapter;
 import com.example.terz99.digitalmenuv2.data.BillContract;
 import com.example.terz99.digitalmenuv2.data.OrderContract;
 
+import org.w3c.dom.Text;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
@@ -42,6 +46,10 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
     private OrderAdapter mAdapter;
 
     private ArrayList<OrderItem> mData;
+
+    public static double totalPrice;
+
+    public static OrderItem deletedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +219,22 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
         mAdapter = new OrderAdapter(this, mData, ORDER_ID);
 
         mRecyclerView.setAdapter(mAdapter);
+
+        setTotalPrice();
+
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                totalPrice -= deletedItem.getmPrice()*(double)deletedItem.getmQuantity();
+                setTotalPrice();
+            }
+        });
+    }
+
+    public void setTotalPrice() {
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        TextView totalPriceTextView = (TextView) findViewById(R.id.total_prize_order);
+        totalPriceTextView.setText(String.valueOf(decimalFormat.format(totalPrice)));
     }
 
     @Override
@@ -260,6 +284,7 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
             cursor = sContext.getContentResolver().query(OrderContract.OrderEntry.CONTENT_URI, projection, null, null, null);
 
             ArrayList<OrderItem> data = new ArrayList<OrderItem>();
+            totalPrice = 0;
 
             while (cursor != null && cursor.moveToNext()){
 
@@ -269,6 +294,8 @@ public class MyOrderActivity extends AppCompatActivity implements LoaderManager.
                 int quantity = cursor.getInt(cursor.getColumnIndex(OrderContract.OrderEntry.COLUMN_QUANTITY));
 
                 data.add(new OrderItem(name, price, quantity, imageId));
+
+                totalPrice += price*(double)quantity;
             }
 
             if (cursor != null) {
