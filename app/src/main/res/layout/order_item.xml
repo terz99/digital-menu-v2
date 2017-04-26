@@ -62,8 +62,8 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_margin="@dimen/regular_margin"
                 android:layout_alignParentTop="true"
                 android:id="@+id/add_button"
@@ -73,22 +73,22 @@
                 >
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:text="Quantity:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity: "
                     android:textStyle="italic"
-                    android:textSize="@dimen/other_text_size"
+                    android:textSize="@dimen/text_size"
+                    android:gravity="center"
                     android:layout_weight="1"
                     />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/o_quantity"
+                    android:gravity="center"
                     tools:text="0"
-                    android:textSize="@dimen/other_text_size"
-
-                    android:layout_margin="@dimen/regular_margin"
+                    android:textSize="@dimen/text_size"
                     android:layout_weight="1"
                     />
             </LinearLayout>
@@ -99,13 +99,12 @@
                 android:id="@+id/clear_button"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:background="@android:color/transparent"
                 android:layout_margin="@dimen/regular_margin"
-                android:src="@drawable/ic_clear_black_24dp"/>
+                android:src="@drawable/ic_clear_black_36dp"/>
 
             <TextView
 
@@ -119,7 +118,7 @@
                 android:layout_marginBottom="@dimen/regular_margin"
                 android:layout_marginLeft="@dimen/regular_margin"
                 android:layout_marginRight="@dimen/regular_margin"
-                android:textSize="@dimen/other_text_size"/>
+                android:textSize="@dimen/text_size"/>
 
 
 

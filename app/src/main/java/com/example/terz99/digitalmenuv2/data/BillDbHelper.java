@@ -15,7 +15,7 @@ public class BillDbHelper extends SQLiteOpenHelper{
     // The name of the order database
     private static final String DATABASE_NAME = "bill.db";
     // The database version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     /**
      * Public constructor used to get a link from the database helper
