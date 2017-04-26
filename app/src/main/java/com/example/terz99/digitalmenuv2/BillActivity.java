@@ -18,11 +18,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.terz99.digitalmenuv2.adapters.OrderAdapter;
 import com.example.terz99.digitalmenuv2.data.BillContract;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
@@ -39,6 +41,8 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
 
     // Adapter used for displaying the data from mData on the UI
     private OrderAdapter mAdapter;
+
+    private static double totalPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +102,9 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
                     getContentResolver().delete(BillContract.BillEntry.CONTENT_URI, null, null);
                     mData = null;
                     mAdapter.notifyDataSetChanged();
+
+                    totalPrice = 0;
+                    setTotalPrice();
 
                     Toast.makeText(BillActivity.this, R.string.bill_request_successful, Toast.LENGTH_LONG)
                             .show();
@@ -163,6 +170,14 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
         mAdapter = new OrderAdapter(this, mData, BILL_ID);
 
         mRecyclerView.setAdapter(mAdapter);
+
+        setTotalPrice();
+    }
+
+    private void setTotalPrice() {
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        TextView totalPriceTextView = (TextView) findViewById(R.id.total_prize_bill);
+        totalPriceTextView.setText(String.valueOf(decimalFormat.format(totalPrice)));
     }
 
     @Override
@@ -194,6 +209,7 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
             cursor = sContext.getContentResolver().query(BillContract.BillEntry.CONTENT_URI, projection, null, null, null);
 
             ArrayList<OrderItem> data = new ArrayList<OrderItem>();
+            totalPrice = 0;
 
             while (cursor != null && cursor.moveToNext()){
 
@@ -203,6 +219,8 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
                 int quantity = cursor.getInt(cursor.getColumnIndex(BillContract.BillEntry.COLUMN_QUANTITY));
 
                 data.add(new OrderItem(name, price, quantity, imageId));
+
+                totalPrice += price*(double)quantity;
             }
 
             return data;

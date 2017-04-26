@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Total Prize: "
+                android:text="Total Price: "
                 android:textSize="@dimen/text_size"
                 android:layout_margin="@dimen/regular_margin"
                 android:layout_gravity="center_vertical"

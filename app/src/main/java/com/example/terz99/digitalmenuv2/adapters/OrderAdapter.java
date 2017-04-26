@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.terz99.digitalmenuv2.BillActivity;
 import com.example.terz99.digitalmenuv2.Item;
+import com.example.terz99.digitalmenuv2.MyOrderActivity;
 import com.example.terz99.digitalmenuv2.OrderItem;
 import com.example.terz99.digitalmenuv2.R;
 import com.example.terz99.digitalmenuv2.data.OrderContract;
@@ -73,7 +74,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
 
         holder.quantityTextView.setText(String.valueOf(currOrderItem.getmQuantity()));
 
-        double fullPrice = currOrderItem.getmPrice()*(double)currOrderItem.getmQuantity();
+        final double fullPrice = currOrderItem.getmPrice()*(double)currOrderItem.getmQuantity();
 
 
         if (holder.mLinearLayout.getBackground() == null){
@@ -121,6 +122,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
                     mContext.getContentResolver().delete(OrderContract.OrderEntry.CONTENT_URI, selection, selectionArgs);
                     mData.remove(position);
                     Toast.makeText(mContext, currOrderItem.getmName() + " " +  mContext.getString(R.string.deletion_successful), Toast.LENGTH_SHORT).show();
+                    MyOrderActivity.deletedItem = currOrderItem;
                     notifyDataSetChanged();
                 }
             });
