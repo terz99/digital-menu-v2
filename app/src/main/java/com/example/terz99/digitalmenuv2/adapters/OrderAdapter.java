@@ -69,6 +69,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
         final OrderAdapter.OrderItemViewHolder OVHolder = holder;
 
         holder.imageView.setImageResource(currOrderItem.getmImageId());
+        holder.imageView.setVerticalFadingEdgeEnabled(true);
+        holder.imageView.setAdjustViewBounds(true);
+        holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         holder.nameTextView.setText(currOrderItem.getmName());
 
