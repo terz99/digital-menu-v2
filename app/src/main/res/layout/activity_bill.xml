@@ -10,6 +10,8 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_layout_bill"
+        android:layout_alignParentTop="true"
         android:id="@+id/b_listview" />
 
     <android.support.design.widget.FloatingActionButton

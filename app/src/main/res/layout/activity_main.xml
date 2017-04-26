@@ -20,39 +20,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:clipToPadding="false"
-
     tools:context="com.example.terz99.digitalmenuv2.MainActivity">
 
 
 
+    <android.support.design.widget.TabLayout
 
-
-    <LinearLayout
-
-
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="@android:color/transparent">
-        <android.support.design.widget.TabLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/sliding_tabs"
-            app:tabMaxWidth="0dp"
-            app:tabGravity="fill"
-            app:tabBackground="@color/Tabs_color"
-            app:tabSelectedTextColor="@color/selected_text_color"
-            app:tabTextColor="@color/unselected_text_color"
-            app:tabIndicatorColor="@color/selected_text_color"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@drawable/scrim"/>
-
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/sliding_tabs"
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
+        app:tabBackground="@color/Tabs_color"
+        app:tabSelectedTextColor="@color/selected_text_color"
+        app:tabTextColor="@color/unselected_text_color"
+        app:tabIndicatorColor="@color/selected_text_color"/>
 
 
 

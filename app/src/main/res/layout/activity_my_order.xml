@@ -11,7 +11,9 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/o_listview" />
+        android:id="@+id/o_listview"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/bottom_layout_myorder"/>
 
     <android.support.design.widget.FloatingActionButton
         android:elevation="8dp"
