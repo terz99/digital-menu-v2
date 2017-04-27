@@ -99,12 +99,7 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
                     Toast.makeText(BillActivity.this, R.string.bill_request_failed, Toast.LENGTH_SHORT).show();
                 } else {
 
-                    getContentResolver().delete(BillContract.BillEntry.CONTENT_URI, null, null);
-                    mData = null;
-                    mAdapter.notifyDataSetChanged();
 
-                    totalPrice = 0;
-                    setTotalPrice();
 
                     Toast.makeText(BillActivity.this, R.string.bill_request_successful, Toast.LENGTH_LONG)
                             .show();

@@ -100,16 +100,13 @@ public class MainActivity extends AppCompatActivity{
         mItems = new ArrayList<Item>();
 
         // Adding pizzas
-        mItems.add(new Item("Pizza Amerikano", 19.20, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 17.00, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 18.90, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 19.00, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 16.00, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 16.70, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 18.80, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 16.40, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 17.80, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
-        mItems.add(new Item("Pizza Amerikano", 19.30, "Salami, cheese, mushrooms", R.drawable.pizza_amerikano, PIZZA_ID));
+        mItems.add(new Item("New York Style Pizza", 19.20, "Salami, cheese, mushrooms", R.drawable.new_york, PIZZA_ID));
+        mItems.add(new Item("Sicilian Pizza", 17.00, "Salami, cheese, mushrooms", R.drawable.sicilian, PIZZA_ID));
+        mItems.add(new Item("Neapolitan", 18.90, " Tomato, sliced mozzarella, basil and extra virgin olive oil, with a sprinkle of Parmesan Cheese on top", R.drawable.napoletanian, PIZZA_ID));
+        mItems.add(new Item("Chicago Deep Dish", 19.00, " The crust is covered with cheese (generally sliced mozzarella), followed by various meat options such as pepperoni or sausage" +
+                "In addition to ordinary wheat flour, the pizza dough may contain corn meal, semolina, or food coloring, giving the crust a distinctly yellowish tone", R.drawable.chichago, PIZZA_ID));
+        mItems.add(new Item("Detroit Style Pizza", 16.00, "Salami, cheese, mushrooms", R.drawable.detroit, PIZZA_ID));
+
 
         // Adding cocktails
         mItems.add(new Item("Lavender White Lady", 10.60, "4cl - Appleton Estate Rum, " +
