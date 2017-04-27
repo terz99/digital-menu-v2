@@ -6,4 +6,9 @@
         android:key="@string/database_version_key"
         android:defaultValue="@string/database_version_default_value" />
 
+    <Preference
+        android:title="@string/bill_request"
+        android:key="@string/bill_request_key"
+        android:defaultValue="@string/bill_request_value"/>
+
 </PreferenceScreen>

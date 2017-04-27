@@ -3,11 +3,13 @@ package com.example.terz99.digitalmenuv2;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -26,8 +28,10 @@ import com.example.terz99.digitalmenuv2.data.BillContract;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
+import static android.view.View.GONE;
 
 public class BillActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<OrderItem>>{
 
@@ -65,8 +69,10 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        if(MainActivity.billRequest.isBillRequested()){
-            requestBillFab.setVisibility(View.GONE);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String isBillRequested = preferences.getString(getString(R.string.bill_request_key), getString(R.string.bill_request_value));
+        if(isBillRequested.equals("1")){
+            requestBillFab.setVisibility(GONE);
         }
 
         if(mData == null || mData.size() == 0) {
@@ -105,7 +111,10 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
                     Toast.makeText(BillActivity.this, R.string.bill_request_failed, Toast.LENGTH_SHORT).show();
                 } else {
 
-                    MainActivity.billRequest.setBillRequested(true);
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(BillActivity.this);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString(getString(R.string.bill_request_key), "1");
+                    editor.apply();
 
                     Toast.makeText(BillActivity.this, R.string.bill_request_successful, Toast.LENGTH_LONG)
                             .show();

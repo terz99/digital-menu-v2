@@ -27,4 +27,7 @@
     <string name="closing_dialog_msg">Bill and My Order have been successfully removed by a waiter.</string>
     <string name="wrong_password">The password you typed was wrong. Please try again.</string>
     <string name="unable_to_order">Sorry, but you cannot order after you have requested your bill.</string>
+    <string name="bill_request">Bill Request</string>
+    <string name="bill_request_key">bill_request</string>
+    <string name="bill_request_value">0</string>
 </resources>

@@ -175,7 +175,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size"
-            android:text="Ingredients:"
+            android:text="Description:"
             android:alpha="1"
             android:textColor="#212121"
             />

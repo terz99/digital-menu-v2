@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity{
     public static ArrayList<Item> mWineData;
     public static ArrayList<Item> mCocktailData;
 
-    public static BillRequest billRequest;
 
 
     // Log tag
@@ -88,7 +87,6 @@ public class MainActivity extends AppCompatActivity{
         } else {
             if (mPizzaData == null || mPizzaData.size() == 0 || mWineData == null || mWineData.size() == 0 || mCocktailData == null || mCocktailData.size() == 0) {
                 getSupportLoaderManager().initLoader(FETCH_DATA_LOADER_ID, null, fetchLoaderCallbacks);
-                billRequest = new BillRequest(this, false);
             } else {
                 setupContent();
             }
@@ -104,7 +102,7 @@ public class MainActivity extends AppCompatActivity{
         mItems = new ArrayList<Item>();
 
         // Adding pizzas
-        mItems.add(new Item("New York Style Pizza", 19.20, "New York-style pizza is traditionally hand-tossed,[3] consisting in its basic form of a light layer of tomato sauce[2] and dry, grated, full-fat mozzarella cheese; additional toppings are placed atop the cheese", R.drawable.rsz_new_york, PIZZA_ID));
+        mItems.add(new Item("New York Style Pizza", 19.20, "New York-style pizza is traditionally hand-tossed, consisting in its basic form of a light layer of tomato sauce and dry, grated, full-fat mozzarella cheese; additional toppings are placed atop the cheese.", R.drawable.rsz_new_york, PIZZA_ID));
         mItems.add(new Item("Sicilian Pizza", 17.00, "Topped with onions, anchovies, tomatoes, herbs and strong cheese such as caciocavallo and toma.", R.drawable.rsz_sicilian, PIZZA_ID));
         mItems.add(new Item("Neapolitan", 18.90, " Tomato, sliced mozzarella, basil and extra virgin olive oil, with a sprinkle of Parmesan Cheese on top", R.drawable.rsz_napoletanian, PIZZA_ID));
         mItems.add(new Item("Chicago Deep Dish", 19.00, " The crust is covered with cheese (generally sliced mozzarella), followed by various meat options such as pepperoni or sausage" +
@@ -341,6 +339,10 @@ public class MainActivity extends AppCompatActivity{
                 }
                 getContentResolver().delete(OrderContract.OrderEntry.CONTENT_URI, null, null);
                 getContentResolver().delete(BillContract.BillEntry.CONTENT_URI, null, null);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString(getString(R.string.bill_request_key), "0");
+                editor.apply();
                 finish();
             }
         });
