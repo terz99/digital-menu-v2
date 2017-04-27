@@ -44,12 +44,14 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private static double totalPrice;
 
+    private FloatingActionButton requestBillFab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill);
 
-        FloatingActionButton requestBillFab =
+        requestBillFab =
                 (FloatingActionButton) findViewById(R.id.b_request_bill_fab);
 
         requestBillFab.setImageBitmap(textAsBitmap("BILL", 40, Color.WHITE));
@@ -62,6 +64,10 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
 
             }
         });
+
+        if(MainActivity.billRequest.isBillRequested()){
+            requestBillFab.setVisibility(View.GONE);
+        }
 
         if(mData == null || mData.size() == 0) {
             getSupportLoaderManager().initLoader(BILL_LOADER_ID, null, this);
@@ -99,7 +105,7 @@ public class BillActivity extends AppCompatActivity implements LoaderManager.Loa
                     Toast.makeText(BillActivity.this, R.string.bill_request_failed, Toast.LENGTH_SHORT).show();
                 } else {
 
-
+                    MainActivity.billRequest.setBillRequested(true);
 
                     Toast.makeText(BillActivity.this, R.string.bill_request_successful, Toast.LENGTH_LONG)
                             .show();

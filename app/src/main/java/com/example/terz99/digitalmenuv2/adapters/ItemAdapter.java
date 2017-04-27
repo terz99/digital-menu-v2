@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.terz99.digitalmenuv2.Item;
+import com.example.terz99.digitalmenuv2.MainActivity;
 import com.example.terz99.digitalmenuv2.MyOrderActivity;
 import com.example.terz99.digitalmenuv2.R;
 import com.example.terz99.digitalmenuv2.data.MenuContract;
@@ -149,58 +150,63 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(mContext,  currItem.getmName() + " " + mContext.getString(R.string.add_button_clicked), Toast.LENGTH_LONG).show();
-
-
-                /**
-                 * Insert/update data to the orderr table
-                 * This happens when the user wants to order something from the menu
-                 * The current added item's data is uploaded to the orderr table and then queried from
-                 * MyOrderActivity.java
-                 */
-                ContentValues contentValues = new ContentValues();
-
-                contentValues.put(OrderContract.OrderEntry.COLUMN_NAME, currItem.getmName());
-                contentValues.put(OrderContract.OrderEntry.COLUMN_DESCRIPTION, currItem.getmDescription());
-                contentValues.put(OrderContract.OrderEntry.COLUMN_PRICE, String.valueOf(currItem.getmPrice()));
-                contentValues.put(OrderContract.OrderEntry.COLUMN_PHOTO_ID, currItem.getmImageId());
-
-                String[] projection = {
-                        OrderContract.OrderEntry.COLUMN_NAME,
-                        OrderContract.OrderEntry.COLUMN_QUANTITY
-                };
-
-                String selection = OrderContract.OrderEntry.COLUMN_NAME + "=?";
-                String[] selectionArgs = {currItem.getmName()};
-
-                /**
-                 * Check if there is already the same item on the order list
-                 * If so, then update the item by adding the new quantity of the item to the previous
-                 * Otherwise, insert the new item's data to the order table
-                 */
-                Cursor checkForItem = mContext.getContentResolver().query(OrderContract.OrderEntry.CONTENT_URI,
-                        projection,
-                        selection,
-                        selectionArgs,
-                        null);
-
-                if(checkForItem != null && checkForItem.getCount() > 0){
-
-                    checkForItem.moveToNext();
-                    int previousQuantity = checkForItem.getInt(checkForItem.getColumnIndex(OrderContract.OrderEntry.COLUMN_QUANTITY));
-                    contentValues.put(OrderContract.OrderEntry.COLUMN_QUANTITY, currItem.getmCounter() + previousQuantity);
-                    mContext.getContentResolver().update(OrderContract.OrderEntry.CONTENT_URI, contentValues, selection, selectionArgs);
+                if(MainActivity.billRequest.isBillRequested()){
+                    Toast.makeText(mContext, R.string.unable_to_order, Toast.LENGTH_LONG).show();
                 } else {
-                    contentValues.put(OrderContract.OrderEntry.COLUMN_QUANTITY, currItem.getmCounter());
-                    mContext.getContentResolver().insert(OrderContract.OrderEntry.CONTENT_URI, contentValues);
-                }
 
-                // Close the cursor if the cursor is still open
-                if (checkForItem != null) {
-                    checkForItem.close();
-                }
+                    Toast.makeText(mContext, currItem.getmName() + " " + mContext.getString(R.string.add_button_clicked), Toast.LENGTH_LONG).show();
 
-                Log.e(TAG, "Added " + contentValues.toString());
+
+                    /**
+                     * Insert/update data to the orderr table
+                     * This happens when the user wants to order something from the menu
+                     * The current added item's data is uploaded to the orderr table and then queried from
+                     * MyOrderActivity.java
+                     */
+                    ContentValues contentValues = new ContentValues();
+
+                    contentValues.put(OrderContract.OrderEntry.COLUMN_NAME, currItem.getmName());
+                    contentValues.put(OrderContract.OrderEntry.COLUMN_DESCRIPTION, currItem.getmDescription());
+                    contentValues.put(OrderContract.OrderEntry.COLUMN_PRICE, String.valueOf(currItem.getmPrice()));
+                    contentValues.put(OrderContract.OrderEntry.COLUMN_PHOTO_ID, currItem.getmImageId());
+
+                    String[] projection = {
+                            OrderContract.OrderEntry.COLUMN_NAME,
+                            OrderContract.OrderEntry.COLUMN_QUANTITY
+                    };
+
+                    String selection = OrderContract.OrderEntry.COLUMN_NAME + "=?";
+                    String[] selectionArgs = {currItem.getmName()};
+
+                    /**
+                     * Check if there is already the same item on the order list
+                     * If so, then update the item by adding the new quantity of the item to the previous
+                     * Otherwise, insert the new item's data to the order table
+                     */
+                    Cursor checkForItem = mContext.getContentResolver().query(OrderContract.OrderEntry.CONTENT_URI,
+                            projection,
+                            selection,
+                            selectionArgs,
+                            null);
+
+                    if (checkForItem != null && checkForItem.getCount() > 0) {
+
+                        checkForItem.moveToNext();
+                        int previousQuantity = checkForItem.getInt(checkForItem.getColumnIndex(OrderContract.OrderEntry.COLUMN_QUANTITY));
+                        contentValues.put(OrderContract.OrderEntry.COLUMN_QUANTITY, currItem.getmCounter() + previousQuantity);
+                        mContext.getContentResolver().update(OrderContract.OrderEntry.CONTENT_URI, contentValues, selection, selectionArgs);
+                    } else {
+                        contentValues.put(OrderContract.OrderEntry.COLUMN_QUANTITY, currItem.getmCounter());
+                        mContext.getContentResolver().insert(OrderContract.OrderEntry.CONTENT_URI, contentValues);
+                    }
+
+                    // Close the cursor if the cursor is still open
+                    if (checkForItem != null) {
+                        checkForItem.close();
+                    }
+
+                    Log.e(TAG, "Added " + contentValues.toString());
+                }
             }
         });
 

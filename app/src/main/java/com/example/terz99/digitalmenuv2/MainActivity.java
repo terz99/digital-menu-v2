@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity{
     public static ArrayList<Item> mWineData;
     public static ArrayList<Item> mCocktailData;
 
+    public static BillRequest billRequest;
+
 
     // Log tag
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -84,10 +86,12 @@ public class MainActivity extends AppCompatActivity{
         if(checkDataBaseVersion()){
             addData();
         } else {
-            if(mPizzaData == null || mPizzaData.size() == 0 || mWineData == null || mWineData.size() == 0 || mCocktailData == null || mCocktailData.size() == 0)
+            if (mPizzaData == null || mPizzaData.size() == 0 || mWineData == null || mWineData.size() == 0 || mCocktailData == null || mCocktailData.size() == 0) {
                 getSupportLoaderManager().initLoader(FETCH_DATA_LOADER_ID, null, fetchLoaderCallbacks);
-            else
+                billRequest = new BillRequest(this, false);
+            } else {
                 setupContent();
+            }
         }
     }
 
@@ -100,12 +104,12 @@ public class MainActivity extends AppCompatActivity{
         mItems = new ArrayList<Item>();
 
         // Adding pizzas
-        mItems.add(new Item("New York Style Pizza", 19.20, "Salami, cheese, mushrooms", R.drawable.new_york, PIZZA_ID));
-        mItems.add(new Item("Sicilian Pizza", 17.00, "Salami, cheese, mushrooms", R.drawable.sicilian, PIZZA_ID));
-        mItems.add(new Item("Neapolitan", 18.90, " Tomato, sliced mozzarella, basil and extra virgin olive oil, with a sprinkle of Parmesan Cheese on top", R.drawable.napoletanian, PIZZA_ID));
+        mItems.add(new Item("New York Style Pizza", 19.20, "New York-style pizza is traditionally hand-tossed,[3] consisting in its basic form of a light layer of tomato sauce[2] and dry, grated, full-fat mozzarella cheese; additional toppings are placed atop the cheese", R.drawable.rsz_new_york, PIZZA_ID));
+        mItems.add(new Item("Sicilian Pizza", 17.00, "Topped with onions, anchovies, tomatoes, herbs and strong cheese such as caciocavallo and toma.", R.drawable.rsz_sicilian, PIZZA_ID));
+        mItems.add(new Item("Neapolitan", 18.90, " Tomato, sliced mozzarella, basil and extra virgin olive oil, with a sprinkle of Parmesan Cheese on top", R.drawable.rsz_napoletanian, PIZZA_ID));
         mItems.add(new Item("Chicago Deep Dish", 19.00, " The crust is covered with cheese (generally sliced mozzarella), followed by various meat options such as pepperoni or sausage" +
-                "In addition to ordinary wheat flour, the pizza dough may contain corn meal, semolina, or food coloring, giving the crust a distinctly yellowish tone", R.drawable.chichago, PIZZA_ID));
-        mItems.add(new Item("Detroit Style Pizza", 16.00, "Salami, cheese, mushrooms", R.drawable.detroit, PIZZA_ID));
+                "In addition to ordinary wheat flour, the pizza dough may contain corn meal, semolina, or food coloring, giving the crust a distinctly yellowish tone", R.drawable.rsz_chichago, PIZZA_ID));
+        mItems.add(new Item("Detroit Style Pizza", 16.00, ". Pepperoni is placed on top of the crust, followed by cheese and other traditional toppings. The sauce is on top, in contrast to New York thin crust with visible toppings and Chicago deep-dish with sauce poured over toppings", R.drawable.rsz_detroit, PIZZA_ID));
 
 
         // Adding cocktails
